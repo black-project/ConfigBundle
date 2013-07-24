@@ -1,0 +1,19 @@
+{% extends 'BlackConfigBundle:AdminConfig:base.html.twig' %}
+{% block content_top %}
+    {% include 'BlackAdminBundle:Admin:contentTop.html.twig' with {'title': "config.admin.contentTop.config.text"} %}
+{% endblock %}
+{% block page_content %}
+<form id="validate" class="main grid9" action="{{ path('admin_config_batch') }}" method="post">
+    <div class="fluid">
+        <div class="widget check">
+            <div class="whead">
+                <span class="titleIcon"><input type="checkbox" id="titleCheck" name="titleCheck" /></span>
+                <h6>{% trans from "views" %}config.admin.index.config.text{% endtrans %}</h6>
+                <div class="clear"></div>
+            </div>
+
+            {% include 'BlackAdminBundle:AdminTable:table.html.twig' with {'documents': documents, 'csrf': csrf} %}
+        </div>
+    </div>
+</form>
+{% endblock %}
