@@ -65,7 +65,7 @@ abstract class Config extends AbstractConfig
             unlink($image);
         }
     }
-    
+
     /**
      * @ODM\PreRemove
      */
