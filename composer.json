@@ -21,7 +21,7 @@
         "doctrine/mongodb-odm-bundle": "Needed when using mongo implementation"
     },
     "autoload": {
-        "psr-0": { "Black\\ConfigBundle": "" }
+        "psr-0": { "Black\\Bundle\\ConfigBundle": "" }
     },
-    "target-dir": "Black/ConfigBundle"
+    "target-dir": "Black/Bundle/ConfigBundle"
 }
