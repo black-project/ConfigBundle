@@ -4,6 +4,7 @@
 {% endblock %}
 {% block page_content %}
 <div class="fluid">
+
     <form id="validate" class="main grid9" action="{{ path(admin_edit, { 'id': document.id }) }}" method="post" {{ form_enctype(form) }}>
         {% include 'BlackAdminBundle:AdminForm:fieldset.html.twig' with {'form': form, 'title': "config.admin.fieldset.config.edit.text" } %}
     </form>
