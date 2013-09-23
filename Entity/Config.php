@@ -57,7 +57,7 @@ abstract class Config extends AbstractConfig
     }
 
     /**
-     * @ODM\PostRemove()
+     * @ORM\PostRemove()
      */
     public function removeUpload()
     {
@@ -67,7 +67,7 @@ abstract class Config extends AbstractConfig
     }
 
     /**
-     * @ODM\PreRemove
+     * @ORM\PreRemove
      */
     public function onRemove()
     {
