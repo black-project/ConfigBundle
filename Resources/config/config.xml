@@ -11,47 +11,13 @@
             <argument>null</argument>
         </service>
 
-        <service id="black_config.config.form.general" factory-method="createNamed" factory-service="form.factory" class="Symfony\Component\Form\Form">
-            <argument>%black_config.config.form.general_name%</argument>
-            <argument type="service" id="black_config.config.form.general_type" />
-            <argument>null</argument>
-        </service>
-
-        <service id="black_config.config.form.mail" factory-method="createNamed" factory-service="form.factory" class="Symfony\Component\Form\Form">
-            <argument>%black_config.config.form.mail_name%</argument>
-            <argument type="service" id="black_config.config.form.mail_type" />
-            <argument>null</argument>
-        </service>
-
         <service id="black_config.config.form.main_type" class="%black_config.config.form.main_type%">
             <argument>%black_config.config.model.class%</argument>
             <tag name="form.type" alias="black_config_config" />
         </service>
 
-        <service id="black_config.config.form.general_type" class="%black_config.config.form.general_type%">
-            <argument>%black_config.config.model.class%</argument>
-            <tag name="form.type" alias="black_config_config_general" />
-        </service>
-
-        <service id="black_config.config.form.mail_type" class="%black_config.config.form.mail_type%">
-            <argument>%black_config.config.model.class%</argument>
-            <tag name="form.type" alias="black_config_config_mail" />
-        </service>
-
         <service id="black_config.config.form.main.handler" class="%black_config.config.form.main_handler%" scope="request" public="true">
             <argument type="service" id="black_config.config.form.main" />
-            <argument type="service" id="request" />
-            <argument type="service" id="session" />
-        </service>
-
-        <service id="black_config.config.form.general.handler" class="%black_config.config.form.general_handler%" scope="request" public="true">
-            <argument type="service" id="black_config.config.form.general" />
-            <argument type="service" id="request" />
-            <argument type="service" id="session" />
-        </service>
-
-        <service id="black_config.config.form.mail.handler" class="%black_config.config.form.mail_handler%" scope="request" public="true">
-            <argument type="service" id="black_config.config.form.mail" />
             <argument type="service" id="request" />
             <argument type="service" id="session" />
         </service>

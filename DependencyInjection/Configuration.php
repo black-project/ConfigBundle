@@ -77,20 +77,6 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('main_handler')->defaultValue(
                                     'Black\\Bundle\\ConfigBundle\\Form\\Handler\\ConfigFormHandler'
                                 )->end()
-                                ->scalarNode('general_name')->defaultValue('black_config_general')->end()
-                                ->scalarNode('general_type')->defaultValue(
-                                    'Black\\Bundle\\ConfigBundle\\Form\\Type\\GeneralConfigType'
-                                )->end()
-                                ->scalarNode('general_handler')->defaultValue(
-                                    'Black\\Bundle\\ConfigBundle\\Form\\Handler\\ConfigFormHandler'
-                                )->end()
-                                ->scalarNode('mail_name')->defaultValue('black_config_config')->end()
-                                ->scalarNode('mail_type')->defaultValue(
-                                    'Black\\Bundle\\ConfigBundle\\Form\\Type\\MailConfigType'
-                                )->end()
-                                ->scalarNode('mail_handler')->defaultValue(
-                                    'Black\\Bundle\\ConfigBundle\\Form\\Handler\\ConfigFormHandler'
-                                )->end()
                             ->end()
                         ->end()
                     ->end()

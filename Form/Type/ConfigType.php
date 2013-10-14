@@ -44,24 +44,15 @@ class ConfigType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add(
-                'name',
-                'text',
-                array(
+            ->add('name', 'text', array(
                     'label' => 'config.admin.config.name.text'
                 )
             )
-            ->add(
-                'value',
-                'textarea',
-                array(
+            ->add('value', 'textarea', array(
                     'label' => 'config.admin.config.value.text'
                 )
             )
-            ->add(
-                'protected',
-                'checkbox',
-                array(
+            ->add('protected', 'checkbox', array(
                     'required'  => false,
                     'label'     => 'config.admin.config.protected.text'
                 )
@@ -75,8 +66,9 @@ class ConfigType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class'    => $this->class,
-                'intention'     => 'config_form'
+                'data_class'            => $this->class,
+                'intention'             => 'config_form',
+                'translation_domain'    => 'form'
             )
         );
     }
