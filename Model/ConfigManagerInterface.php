@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\ConfigBundle\Model;
 
 use Black\Bundle\ConfigBundle\Model\ManagerInterface;
@@ -16,6 +17,8 @@ use Black\Bundle\ConfigBundle\Model\ManagerInterface;
  * Class ConfigManagerInterface
  *
  * @package Black\Bundle\ConfigBundle\Model
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 interface ConfigManagerInterface extends ManagerInterface
 {

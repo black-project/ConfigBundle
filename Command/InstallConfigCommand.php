@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Black package.
  *
@@ -17,8 +18,18 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Class InstallConfigCommand
+ *
+ * @package Black\Bundle\ConfigBundle\Command
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
+ */
 class InstallConfigCommand extends ContainerAwareCommand
 {
+    /**
+     *
+     */
     protected function configure()
     {
         $this
@@ -26,6 +37,10 @@ class InstallConfigCommand extends ContainerAwareCommand
             ->setDescription('Create needed object for your orm/odm');
     }
 
+    /**
+     * @param InputInterface  $input
+     * @param OutputInterface $output
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $manager  = $this->getManager();
@@ -42,6 +57,13 @@ class InstallConfigCommand extends ContainerAwareCommand
 
     }
 
+    /**
+     * @param ConfigManagerInterface $manager
+     * @param InputInterface         $input
+     * @param OutputInterface        $output
+     *
+     * @return string
+     */
     private function createGeneral(ConfigManagerInterface $manager, InputInterface $input, OutputInterface $output)
     {
         if ($manager->findPropertyByName('General')) {
@@ -105,6 +127,12 @@ class InstallConfigCommand extends ContainerAwareCommand
         return '<info>The property General was created!</info>';
     }
 
+    /**
+     * @param ConfigManagerInterface $manager
+     * @param InputInterface         $input
+     * @param OutputInterface        $output
+     * @return string
+     */
     private function createMail(ConfigManagerInterface $manager, InputInterface $input, OutputInterface $output)
     {
         if ($manager->findPropertyByName('Mail')) {
@@ -151,6 +179,9 @@ class InstallConfigCommand extends ContainerAwareCommand
         return '<info>The property mail was created!</info>';
     }
 
+    /**
+     * @return \Black\Bundle\ConfigBundle\Doctrine\ConfigManager
+     */
     private function getManager()
     {
         return $this->getContainer()->get('black_config.manager.config');

@@ -16,7 +16,9 @@ use Doctrine\ORM\EntityRepository;
 /**
  * Class ConfigRepository
  *
- * @package Black\Bundle\ConfigBundle\Entity\Config
+ * @package Black\Bundle\ConfigBundle\Entity
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class ConfigRepository extends EntityRepository implements ConfigRepositoryInterface
 {

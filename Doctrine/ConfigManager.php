@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\ConfigBundle\Doctrine;
 
 use Black\Bundle\ConfigBundle\Model\ConfigInterface;
@@ -17,7 +18,9 @@ use Doctrine\Common\Persistence\ObjectManager;
 /**
  * Class ConfigManager
  *
- * @package Black\Bundle\ConfigBundle\Config
+ * @package Black\Bundle\ConfigBundle\Doctrine
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class ConfigManager implements ConfigManagerInterface
 {
@@ -42,8 +45,6 @@ class ConfigManager implements ConfigManagerInterface
     protected $class;
 
     /**
-     * Constructor
-     *
      * @param ObjectManager $dm
      * @param string        $class
      */
@@ -58,7 +59,7 @@ class ConfigManager implements ConfigManagerInterface
     }
 
     /**
-     * @return DocumentManager
+     * @return ObjectManager|mixed
      */
     public function getManager()
     {
@@ -66,7 +67,7 @@ class ConfigManager implements ConfigManagerInterface
     }
 
     /**
-     * @return ObjectRepository
+     * @return ObjectRepository|\Doctrine\Common\Persistence\ObjectRepository|mixed
      */
     public function getRepository()
     {
@@ -88,7 +89,7 @@ class ConfigManager implements ConfigManagerInterface
     }
 
     /**
-     * Flush
+     *
      */
     public function flush()
     {
@@ -96,8 +97,6 @@ class ConfigManager implements ConfigManagerInterface
     }
 
     /**
-     * Remove the document
-     * 
      * @param object $model
      *
      * @throws \InvalidArgumentException
@@ -111,8 +110,6 @@ class ConfigManager implements ConfigManagerInterface
     }
 
     /**
-     * Save and Flush a new document
-     *
      * @param mixed $model
      */
     public function persistAndFlush($model)
@@ -122,8 +119,6 @@ class ConfigManager implements ConfigManagerInterface
     }
 
     /**
-     * Remove and flush
-     * 
      * @param mixed $model
      */
     public function removeAndFlush($model)
@@ -133,9 +128,7 @@ class ConfigManager implements ConfigManagerInterface
     }
 
     /**
-     * Create a new model
-     *
-     * @return $config object
+     * @return mixed
      */
     public function createInstance()
     {
@@ -173,8 +166,6 @@ class ConfigManager implements ConfigManagerInterface
     }
 
     /**
-     * Find property by it's id
-     *
      * @param integer $id
      * 
      * @return \Black\Bundle\ConfigBundle\Model\ConfigInterface|object
@@ -185,8 +176,6 @@ class ConfigManager implements ConfigManagerInterface
     }
 
     /**
-     * Find property by it's name
-     *
      * @param string  $name
      * 
      * @return \Black\Bundle\ConfigBundle\Model\ConfigInterface|object
@@ -197,8 +186,6 @@ class ConfigManager implements ConfigManagerInterface
     }
 
     /**
-     * Get loaded properties
-     *
      * @return array
      */
     public function getProperties()
@@ -219,7 +206,7 @@ class ConfigManager implements ConfigManagerInterface
     }
 
     /**
-     * Unload properties and load again
+     *
      */
     public function reloadProperties()
     {
@@ -228,7 +215,7 @@ class ConfigManager implements ConfigManagerInterface
     }
 
     /**
-     * Unload properties
+     *
      */
     public function unload()
     {

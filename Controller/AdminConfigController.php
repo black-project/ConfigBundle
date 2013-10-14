@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\ConfigBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -19,15 +20,17 @@ use Black\Bundle\ConfigBundle\Form\Type;
 use Symfony\Component\Serializer\Exception;
 
 /**
- * Config controller.
+ * Class AdminConfigController
  *
  * @Route("/admin/config")
+ *
+ * @package Black\Bundle\ConfigBundle\Controller
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class AdminConfigController extends Controller
 {
     /**
-     * Lists all Config documents.
-     *
      * @Method("GET")
      * @Route("/index.html", name="admin_config")
      * @Secure(roles="ROLE_SUPER_ADMIN")
@@ -58,8 +61,6 @@ class AdminConfigController extends Controller
     }
 
     /**
-     * Displays a form to create a new Config document.
-     *
      * @Method({"GET", "POST"})
      * @Route("/new", name="admin_config_new")
      * @Secure(roles="ROLE_SUPER_ADMIN")
@@ -90,8 +91,6 @@ class AdminConfigController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Config document.
-     *
      * @Method({"GET", "POST"})
      * @Route("/{id}/edit", name="admin_config_edit")
      * @Secure(roles="ROLE_SUPER_ADMIN")
@@ -131,8 +130,6 @@ class AdminConfigController extends Controller
     }
 
     /**
-     * Display a general form based on GeneralConfigType.
-     *
      * @Route("/general.html", name="admin_config_general")
      * @Secure(roles="ROLE_SUPER_ADMIN")
      * @Template()
@@ -165,8 +162,6 @@ class AdminConfigController extends Controller
     }
 
     /**
-     * Display a general form based on GeneralConfigType.
-     *
      * @Route("/mail.html", name="admin_config_mail")
      * @Secure(roles="ROLE_SUPER_ADMIN")
      * @Template()
@@ -199,8 +194,6 @@ class AdminConfigController extends Controller
     }
 
     /**
-     * Deletes a Config document.
-     *
      * @Method({"POST", "GET"})
      * @Route("/config/{id}/delete/{token}", name="admin_config_delete")
      * @Secure(roles="ROLE_SUPER_ADMIN")
@@ -241,8 +234,6 @@ class AdminConfigController extends Controller
     }
 
     /**
-     * Deletes a Config document.
-     *
      * @Method({"POST"})
      * @Route("/config/batch", name="admin_config_batch")
      *
@@ -295,8 +286,6 @@ class AdminConfigController extends Controller
     }
 
     /**
-     * Returns the DocumentManager
-     *
      * @return DocumentManager
      */
     protected function getManager()

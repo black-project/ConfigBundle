@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\ConfigBundle\Form\Handler;
 
 use Symfony\Component\Form\FormInterface;
@@ -19,6 +20,8 @@ use Black\Bundle\ConfigBundle\Model\ConfigInterface;
  * Class ConfigFormHandler
  *
  * @package Black\Bundle\ConfigBundle\Form\Handler
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class ConfigFormHandler
 {

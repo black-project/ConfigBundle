@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Black package.
+ *
+ * (c) Alexandre Balmes <albalmes@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Black\Bundle\ConfigBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Processor;
@@ -9,7 +18,11 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 /**
- * BlackEngineExtension
+ * Class BlackConfigExtension
+ *
+ * @package Black\Bundle\ConfigBundle\DependencyInjection
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class BlackConfigExtension extends Extension
 {
@@ -56,6 +69,11 @@ class BlackConfigExtension extends Extension
         }
     }
 
+    /**
+     * @param array            $config
+     * @param ContainerBuilder $container
+     * @param XmlFileLoader    $loader
+     */
     private function loadConfig(array $config, ContainerBuilder $container, XmlFileLoader $loader)
     {
         $loader->load('config.xml');
@@ -69,6 +87,11 @@ class BlackConfigExtension extends Extension
         );
     }
 
+    /**
+     * @param array            $config
+     * @param ContainerBuilder $container
+     * @param array            $map
+     */
     protected function remapParameters(array $config, ContainerBuilder $container, array $map)
     {
         foreach ($map as $name => $paramName) {
@@ -78,6 +101,11 @@ class BlackConfigExtension extends Extension
         }
     }
 
+    /**
+     * @param array            $config
+     * @param ContainerBuilder $container
+     * @param array            $namespaces
+     */
     protected function remapParametersNamespaces(array $config, ContainerBuilder $container, array $namespaces)
     {
         foreach ($namespaces as $ns => $map) {

@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\ConfigBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -17,7 +18,11 @@ use Black\Bundle\ConfigBundle\Model\AbstractConfig;
 /**
  * Class Config
  *
- * @package Black\Bundle\ConfigBundle\Entity\Config
+ * @ORM\MappedSuperclass()
+ *
+ * @package Black\Bundle\ConfigBundle\Entity
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 abstract class Config extends AbstractConfig
 {
