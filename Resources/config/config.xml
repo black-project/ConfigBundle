@@ -13,12 +13,15 @@
 
         <service id="black_config.config.form.main_type" class="%black_config.config.form.main_type%">
             <argument>%black_config.config.model.class%</argument>
+            <argument type="service" id="black_admin.form.event.button" />
             <tag name="form.type" alias="black_config_config" />
         </service>
 
         <service id="black_config.config.form.main.handler" class="%black_config.config.form.main_handler%" scope="request" public="true">
             <argument type="service" id="black_config.config.form.main" />
+            <argument type="service" id="black_config.manager.config" />
             <argument type="service" id="request" />
+            <argument type="service" id="router" />
             <argument type="service" id="session" />
         </service>
     </services>

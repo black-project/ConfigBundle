@@ -77,9 +77,7 @@ class AdminConfigController extends Controller
         $process            = $formHandler->process($document);
 
         if ($process) {
-            $documentManager->persistAndFlush($document);
-
-            return $this->redirect($this->generateUrl('admin_config_edit', array('id' => $document->getId())));
+            return $this->redirect($formHandler->getUrl());
         }
 
         return array(
@@ -111,21 +109,16 @@ class AdminConfigController extends Controller
             throw $this->createNotFoundException('Unable to find Config document.');
         }
 
-        $deleteForm     = $this->createDeleteForm($id);
-
         $formHandler    = $this->get('black_config.config.form.main.handler');
         $process        = $formHandler->process($document);
 
         if ($process) {
-            $documentManager->updateProperty($document);
-
-            return $this->redirect($this->generateUrl('admin_config_edit', array('id' => $id)));
+            return $this->redirect($formHandler->getUrl());
         }
 
         return array(
             'document'      => $document,
-            'form'          => $formHandler->getForm()->createView(),
-            'delete_form'   => $deleteForm->createView()
+            'form'          => $formHandler->getForm()->createView()
         );
     }
 

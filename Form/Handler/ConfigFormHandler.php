@@ -11,10 +11,13 @@
 
 namespace Black\Bundle\ConfigBundle\Form\Handler;
 
+use Black\Bundle\ConfigBundle\Model\ConfigManagerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Black\Bundle\ConfigBundle\Model\ConfigInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Routing\RouterInterface;
 
 /**
  * Class ConfigFormHandler
@@ -26,9 +29,9 @@ use Black\Bundle\ConfigBundle\Model\ConfigInterface;
 class ConfigFormHandler
 {
     /**
-     * @var \Symfony\Component\HttpFoundation\Request
+     * @var \Black\Bundle\ConfigBundle\Model\ConfigManagerInterface
      */
-    protected $request;
+    protected $configManager;
 
     /**
      * @var \Symfony\Component\Form\FormInterface
@@ -41,20 +44,34 @@ class ConfigFormHandler
     protected $factory;
 
     /**
+     * @var \Symfony\Component\HttpFoundation\Request
+     */
+    protected $request;
+
+    /**
+     * @var \Symfony\Component\Routing\RouterInterface
+     */
+    protected $router;
+
+    /**
      * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
      */
     protected $session;
 
     /**
-     * @param FormInterface    $form
-     * @param Request          $request
-     * @param SessionInterface $session
+     * @param FormInterface          $form
+     * @param ConfigManagerInterface $configManager
+     * @param Request                $request
+     * @param RouterInterface        $router
+     * @param SessionInterface       $session
      */
-    public function __construct(FormInterface $form, Request $request, SessionInterface $session)
+    public function __construct(FormInterface $form, ConfigManagerInterface $configManager, Request $request, RouterInterface $router, SessionInterface $session)
     {
-        $this->form     = $form;
-        $this->request  = $request;
-        $this->session  = $session;
+        $this->form             = $form;
+        $this->configManager    = $configManager;
+        $this->request          = $request;
+        $this->router           = $router;
+        $this->session          = $session;
     }
 
     /***
@@ -67,15 +84,16 @@ class ConfigFormHandler
 
         if ('POST' === $this->request->getMethod()) {
 
-            $this->form->bind($this->request);
+            $this->form->handleRequest($this->request);
+
+            if ($this->form->has('delete') && $this->form->get('delete')->isClicked()) {
+                return $this->onDelete($config);
+            }
 
             if ($this->form->isValid()) {
-                $config->upload();
-                $this->setFlash('success', 'success.config.admin.config.edit');
-
-                return true;
+                return $this->onSave($config);
             } else {
-                $this->setFlash('error', 'error.config.admin.config.edit');
+                return $this->onFailed();
             }
         }
     }
@@ -89,6 +107,76 @@ class ConfigFormHandler
     }
 
     /**
+     * @param $url
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * @param ConfigInterface $config
+     *
+     * @return mixed
+     */
+    protected function onSave(ConfigInterface $config)
+    {
+        $config->upload();
+
+        if (!$config->getId()) {
+            $this->configManager->persist($config);
+        }
+
+        $this->configManager->flush();
+
+        if ($this->form->get('save')->isClicked()) {
+            $this->setUrl($this->generateUrl('admin_config_edit', array('id' => $config->getId())));
+
+            return true;
+        }
+
+        if ($this->form->get('saveAndAdd')->isClicked()) {
+            $this->setUrl($this->generateUrl('admin_config_new'));
+
+            return true;
+        }
+    }
+
+    /**
+     * @param $config
+     *
+     * @return bool
+     */
+    protected function onDelete($config)
+    {
+        $this->configManager->remove($config);
+        $this->configManager->flush();
+
+        $this->setFlash('success', 'success.page.admin.page.delete');
+        $this->setUrl($this->generateUrl('admin_config_index'));
+
+        return true;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function onFailed()
+    {
+        $this->setFlash('error', 'error.page.admin.page.not.valid');
+
+        return false;
+    }
+
+    /**
      * @param $name
      * @param $msg
      *
@@ -97,5 +185,17 @@ class ConfigFormHandler
     protected function setFlash($name, $msg)
     {
         return $this->session->getFlashBag()->add($name, $msg);
+    }
+
+    /**
+     * @param       $route
+     * @param array $parameters
+     * @param       $referenceType
+     *
+     * @return mixed
+     */
+    public function generateUrl($route, $parameters = array(), $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH)
+    {
+        return $this->router->generate($route, $parameters, $referenceType);
     }
 }

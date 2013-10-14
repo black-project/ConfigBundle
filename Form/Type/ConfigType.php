@@ -11,6 +11,7 @@
 
 namespace Black\Bundle\ConfigBundle\Form\Type;
 
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -32,9 +33,10 @@ class ConfigType extends AbstractType
     /**
      * @param string $class The Person class name
      */
-    public function __construct($class)
+    public function __construct($class, EventSubscriberInterface $eventSubscriber)
     {
-        $this->class = $class;
+        $this->class            = $class;
+        $this->eventSubscriber  = $eventSubscriber;
     }
 
     /**
@@ -43,6 +45,8 @@ class ConfigType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $builder->addEventSubscriber($this->eventSubscriber);
+
         $builder
             ->add('name', 'text', array(
                     'label' => 'config.admin.config.name.text'
