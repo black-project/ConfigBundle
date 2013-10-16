@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\ConfigBundle\Twig;
 
 use Black\Bundle\ConfigBundle\Model\ConfigManagerInterface;
@@ -16,6 +17,8 @@ use Black\Bundle\ConfigBundle\Model\ConfigManagerInterface;
  * Class BlackTwigExtensions
  *
  * @package Black\Bundle\ConfigBundle\Twig
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class BlackTwigExtensions extends \Twig_Extension
 {
