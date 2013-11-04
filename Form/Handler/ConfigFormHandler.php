@@ -137,6 +137,10 @@ class ConfigFormHandler
 
         $this->configManager->flush();
 
+        if (true === $config->getProtected()) {
+            return true;
+        }
+
         if ($this->form->get('save')->isClicked()) {
             $this->setUrl($this->generateUrl('admin_config_edit', array('id' => $config->getId())));
 
