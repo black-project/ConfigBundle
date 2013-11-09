@@ -1,13 +1,13 @@
 {% extends 'BlackConfigBundle:AdminConfig:base.html.twig' %}
 {% block content_top %}
-    {% include 'BlackAdminBundle:Admin:contentTop.html.twig' with {'title': "config.admin.contentTop.config.new.text"} %}
+    {% include 'BlackAdminBundle:Admin:contentTop.html.twig' with {'title': "black.bundle.config.adminConfig.new.contentTop.config.new.text"} %}
 {% endblock %}
 {% block page_content %}
 <div class="fluid">
 
     <form id="validate" class="main" action="{{ path(admin_new) }}"  method="post" {{ form_enctype(form) }}>
         <fieldset>
-            {% include 'BlackConfigBundle:AdminConfig:fieldset.html.twig' with {'form': form, 'title': "config.admin.fieldset.config.new.text"} %}
+            {% include 'BlackConfigBundle:AdminConfig:fieldset.html.twig' with {'form': form, 'title': "black.bundle.config.adminConfig.new.fieldset.config.new.text"} %}
         </fieldset>
     </form>
 
