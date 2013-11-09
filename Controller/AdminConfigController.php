@@ -155,7 +155,7 @@ class AdminConfigController extends Controller
 
             $dm->removeAndFlush($document);
 
-            $this->get('session')->getFlashbag()->add('success', 'success.config.admin.config.delete');
+            $this->get('session')->getFlashbag()->add('success', 'black.bundle.config.success.config.admin.config.delete');
 
         }
 
@@ -176,12 +176,12 @@ class AdminConfigController extends Controller
         $token      = $this->get('form.csrf_provider')->isCsrfTokenValid('batch', $request->get('token'));
 
         if (!$ids = $request->get('ids')) {
-            $this->get('session')->getFlashbag()->add('error', 'error.config.admin.config.no.item');
+            $this->get('session')->getFlashbag()->add('error', 'black.bundle.config.error.config.admin.config.no.item');
             return $this->redirect($this->generateUrl('admin_config'));
         }
 
         if (!$action = $request->get('batchAction')) {
-            $this->get('session')->getFlashBag()->add('error', 'error.config.admin.config.no.action');
+            $this->get('session')->getFlashBag()->add('error', 'black.bundle.config.error.config.admin.config.no.action');
             return $this->redirect($this->generateUrl('admin_config'));
         }
 
@@ -192,7 +192,7 @@ class AdminConfigController extends Controller
         }
 
         if (false === $token) {
-            $this->get('session')->getFlashBag()->add('error', 'error.config.admin.config.crsf');
+            $this->get('session')->getFlashBag()->add('error', 'black.bundle.config.error.config.admin.config.crsf');
 
             return $this->redirect($this->generateUrl('admin_config'));
         }

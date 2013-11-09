@@ -1,9 +1,9 @@
 {% extends 'BlackAdminBundle::base.html.twig' %}
 {% block body %}
 
-{% include 'BlackAdminBundle:Admin:header.html.twig' %}
-{% include 'BlackAdminBundle:Admin:sidebar.html.twig' %}
-{% include 'BlackConfigBundle:AdminConfig:sidebar.html.twig' %}
+    {% include 'BlackAdminBundle:Admin:header.html.twig' %}
+    {% include 'BlackAdminBundle:Admin:sidebar.html.twig' %}
+    {% include 'BlackConfigBundle:AdminConfig:sidebar.html.twig' %}
 
     {% set admin_index = 'admin_config' %}
     {% set admin_delete = 'admin_config_delete' %}
@@ -12,16 +12,15 @@
 
     <div id="content">
         {% block content_top %}
-            {% include 'BlackAdminBundle:Admin:contentTop.html.twig' with {'title': "config.admin.contentTop.config.text"} %}
+            {% include 'BlackAdminBundle:Admin:contentTop.html.twig' with {'title': "black.bundle.config.adminConfig.base.contentTop.config.text"} %}
         {% endblock %}
         {% include 'BlackConfigBundle:Admin:breadLine.html.twig' with {
-            'route': admin_new,
-            'text': "config.admin.breadLine.config.new.text",
-            'a_route': admin_index,
-            'a_text': "config.admin.breadLine.config.breadcrumb.a.text",
-            'a_title': "config.admin.breadLine.config.breadcrumb.a.title"
-            }
-        %}
+        'route': admin_new,
+        'text': "black.bundle.config.adminConfig.base.breadLine.config.new.text",
+        'a_route': admin_index,
+        'a_text': "black.bundle.config.adminConfig.base.breadLine.config.breadcrumb.a.text",
+        'a_title': "black.bundle.config.adminConfig.base.breadLine.config.breadcrumb.a.title"
+        } %}
         {#  Main content  #}
         <div class="wrapper">
 
