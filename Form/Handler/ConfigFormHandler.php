@@ -132,7 +132,7 @@ class ConfigFormHandler
         $config->upload();
 
         if (!$config->getId()) {
-            $this->configManager->persist($config);
+            $this->confpuigManager->persist($config);
         }
 
         $this->configManager->flush();

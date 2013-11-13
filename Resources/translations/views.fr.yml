@@ -8,6 +8,7 @@ black:
                             text: Tableau de bord
                     shortcut:
                         text: Raccourci
+                        title: Acceder au raccourci
                     config:
                         breadcrumb:
                             a:
@@ -43,6 +44,7 @@ black:
                             text: Actions
                             submit:
                                 value: Mettre à jour
+                                title: Mettre à jour les données
                     breadLine:
                         new:
                             text: Créer une propriété
@@ -68,9 +70,9 @@ black:
                         mail:
                             text: Configuration mail
                     actions:
-                        header: !n!
+                        header: Actions
                     general:
-                        header: !n!
+                        header: Nouvelle propriété
                 index:
                     contentTop:
                         config:

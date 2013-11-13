@@ -3,7 +3,7 @@
     <div class="bc">
         <ul id="breadcrumbs" class="breadcrumbs">
             <li>
-                <a href="{{ url('admin_index') }}" title="{% trans from "views" %}admin.admin.breadLine.dashboard.a.title{% endtrans %}">
+                <a href="{{ url('admin_index') }}" title="{% trans from "views" %}black.bundle.admin.admin.breadLine.dashboard.a.title{% endtrans %}">
                     {% trans from "views" %}black.bundle.config.admin.breadLine.dashboard.a.text{% endtrans %}
                 </a>
             </li>
@@ -20,22 +20,23 @@
             <li class="has">
                 <a title="">
                     <i class="icos-money3"></i>
-<<<<<<< HEAD
+{#<<<<<<< HEAD#}
                     <span>{% trans from "views" %}black.bundle.config.admin.breadLine.shortcut.text{% endtrans %}</span>
                     <span><img src="/bundles/blackadmin/images/elements/control/hasddArrow.png" alt="" /></span>
-=======
-                    <span>{% trans from "views" %}config.admin.breadLine.shortcut.text{% endtrans %}</span>
-                    <span><img src="/admin/images/elements/control/hasddArrow.png" alt="" /></span>
->>>>>>> 275f5a331a5a6f66743700ae75534547041bd09f
+{#=======#}
+                    {#<span>{% trans from "views" %}config.admin.breadLine.shortcut.text{% endtrans %}</span>#}
+                    {#<span><img src="/admin/images/elements/control/hasddArrow.png" alt="" /></span>#}
+{#>>>>>>> 275f5a331a5a6f66743700ae75534547041bd09f#}
                 </a>
                 <ul>
+
                 {% if shortcuts is defined %}
                     {% for shortcut in shortcuts %}
-                        <li><a href="{{ path(shortcut.route) }}" title=""><span class="icos-add"></span>{{ shortcut.text|trans({}, "views") }}</a></li>
+                        <li><a href="{{ path(shortcut.route) }}" title="{{ shortcut.text|trans({}, "views") }}"><span class="icos-add"></span>{{ shortcut.text|trans({}, "views") }}</a></li>
                     {% endfor %}
                 {% else %}
                     {% if route is defined %}
-                        <li><a href="{{ path(route) }}" title=""><span class="icos-add"></span>{{ text|trans({}, "views") }}</a></li>
+                        <li><a href="{{ path(route) }}" title="{{ text|trans({}, "views") }}"><span class="icos-add"></span>{{ text|trans({}, "views") }}</a></li>
                     {% endif %}
                 {% endif %}
                 </ul>
