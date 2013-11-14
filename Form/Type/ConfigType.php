@@ -26,9 +26,14 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class ConfigType extends AbstractType
 {
     /**
-     * @var string
+     * @var type
      */
-    private $class;
+    protected $class;
+
+    /**
+     * @var \Symfony\Component\EventDispatcher\EventSubscriberInterface
+     */
+    protected $eventSubscriber;
 
     /**
      * @param string $class The Person class name
