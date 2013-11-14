@@ -139,6 +139,7 @@ class AdminConfigController extends Controller
         $request    = $this->getRequest();
 
         $form->bind($request);
+        #  $form->submit($request);
 
         if (null !== $token) {
             $token = $this->get('form.csrf_provider')->isCsrfTokenValid('delete' . $id, $token);

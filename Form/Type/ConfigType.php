@@ -54,16 +54,16 @@ class ConfigType extends AbstractType
 
         $builder
             ->add('name', 'text', array(
-                    'label' => 'config.admin.config.name.text'
+                    'label' => 'black.bundle.config.admin.config.name.text'
                 )
             )
             ->add('value', 'textarea', array(
-                    'label' => 'config.admin.config.value.text'
+                    'label' => 'black.bundle.config.admin.config.value.text'
                 )
             )
             ->add('protected', 'checkbox', array(
                     'required'  => false,
-                    'label'     => 'config.admin.config.protected.text'
+                    'label'     => 'black.bundle.config.admin.config.protected.text'
                 )
             );
     }
