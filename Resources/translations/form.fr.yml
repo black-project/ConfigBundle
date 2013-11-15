@@ -80,3 +80,11 @@ black:
                                 text: Message du mail de copie de contact
                         footer:
                             text: Pied de page du mail
+
+                eventListener:
+                    setButtonsSubscriber:
+                        button:
+                            save:
+                                label: Sauver
+                            reset:
+                                label: Annuler
