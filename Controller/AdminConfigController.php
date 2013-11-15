@@ -18,6 +18,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Black\Bundle\ConfigBundle\Form\Type;
 use Symfony\Component\Serializer\Exception;
+use Black\Bundle\ConfigBundle\Exception\ConfigNotFoundException;
 
 /**
  * Class AdminConfigController
@@ -106,7 +107,7 @@ class AdminConfigController extends Controller
         $document           = $documentManager->findPropertyById($id);
 
         if (!$document) {
-            throw $this->createNotFoundException('Unable to find Config document.');
+            throw new ConfigNotFoundException();
         }
 
         $formHandler    = $this->get('black_config.config.form.main.handler');
@@ -138,8 +139,7 @@ class AdminConfigController extends Controller
         $form       = $this->createDeleteForm($id);
         $request    = $this->getRequest();
 
-        $form->bind($request);
-        #  $form->submit($request);
+        $form->handleRequest($request);
 
         if (null !== $token) {
             $token = $this->get('form.csrf_provider')->isCsrfTokenValid('delete' . $id, $token);
@@ -151,7 +151,7 @@ class AdminConfigController extends Controller
             $document = $dm->findPropertyById($id);
 
             if (!$document) {
-                throw $this->createNotFoundException('Unable to find Config document.');
+                throw new ConfigNotFoundException();
             }
 
             $dm->removeAndFlush($document);
