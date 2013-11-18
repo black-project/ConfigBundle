@@ -59,6 +59,11 @@ class ConfigFormHandler
     protected $session;
 
     /**
+     * @var
+     */
+    protected $url;
+
+    /**
      * @param FormInterface          $form
      * @param ConfigManagerInterface $configManager
      * @param Request                $request
@@ -138,6 +143,8 @@ class ConfigFormHandler
         $this->configManager->flush();
 
         if (true === $config->getProtected()) {
+            $this->setUrl($this->request->headers->get('referer'));
+
             return true;
         }
 

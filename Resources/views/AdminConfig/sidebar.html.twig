@@ -3,7 +3,7 @@
     <div class="secWrapper">
         <div class="secTop">
             <div class="balance">
-                <div class="balInfo">{% trans from "views" %}config.admin.sidebar.config.text{% endtrans %}</div>
+                <div class="balInfo">{% trans from "views" %}black.bundle.config.sidebar.config.text{% endtrans %}</div>
             </div>
         </div>
 
@@ -22,18 +22,27 @@
             <div id="general">
                 <ul class="subNav">
                     <li>
-                        <a href="{{ path('admin_config') }}" title="{% trans from "views" %}config.admin.sidebar.config.a.title{% endtrans %}" {% if currentPath == path('admin_config') %}class="this"{% endif %}>
-                            <span class="icos-list2"></span>{% trans from "views" %}config.admin.sidebar.config.a.text{% endtrans %}
+                        <a href="{{ path('admin_config') }}"
+                           title="{% trans from "views" %}black.bundle.config.adminConfig.sidebar.config.a.title{% endtrans %}"
+                           {% if currentPath == path('admin_config') %}class="this"{% endif %}>
+                            <span class="icos-list2"></span>{% trans from "views" %}
+                            black.bundle.config.adminConfig.sidebar.config.a.text{% endtrans %}
                         </a>
                     </li>
                     <li>
-                        <a href="{{ path('admin_config_general') }}" title="{% trans from "views" %}config.admin.sidebar.config.general.a.title{% endtrans %}" {% if currentPath == path('admin_config_general') %}class="this"{% endif %}>
-                            <span class="icos-list2"></span>{% trans from "views" %}config.admin.sidebar.config.general.a.text{% endtrans %}
+                        <a href="{{ path('admin_config_general') }}"
+                           title="{% trans from "views" %}black.bundle.config.adminconfig.sidebar.config.general.a.title{% endtrans %}"
+                           {% if currentPath == path('admin_config_general') %}class="this"{% endif %}>
+                            <span class="icos-list2"></span>{% trans from "views" %}
+                            black.bundle.config.adminconfig.sidebar.config.general.a.text{% endtrans %}
                         </a>
                     </li>
                     <li>
-                        <a href="{{ path('admin_config_mail') }}" title="{% trans from "views" %}config.admin.sidebar.config.mail.a.title{% endtrans %}" {% if currentPath == path('admin_config_mail') %}class="this"{% endif %}>
-                            <span class="icos-list2"></span>{% trans from "views" %}config.admin.sidebar.config.mail.a.text{% endtrans %}
+                        <a href="{{ path('admin_config_mail') }}"
+                           title="{% trans from "views" %}black.bundle.config.adminconfig.sidebar.config.mail.a.title{% endtrans %}"
+                           {% if currentPath == path('admin_config_mail') %}class="this"{% endif %}>
+                            <span class="icos-list2"></span>{% trans from "views" %}
+                            black.bundle.config.adminConfig.sidebar.config.mail.a.text{% endtrans %}
                         </a>
                     </li>
                 </ul>

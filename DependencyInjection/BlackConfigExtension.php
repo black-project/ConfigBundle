@@ -49,7 +49,7 @@ class BlackConfigExtension extends Extension
             );
         }
 
-        foreach (array('twig') as $basename) {
+        foreach (array('twig', 'services') as $basename) {
             $loader->load(sprintf('%s.xml', $basename));
         }
 

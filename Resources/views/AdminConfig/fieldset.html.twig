@@ -1,0 +1,27 @@
+{% set title = title is defined ? title : "Create a new thing" %}
+
+<fieldset class="grid9">
+    <div class="widget">
+        <div class="whead"><h6>{% trans from "views" %}black.bundle.config.adminConfig.fieldset.general.header{% endtrans %}</h6>
+            <div class="clear"></div>
+        </div>
+        {{ form_row(form.name) }}
+        {{ form_row(form.value) }}
+        {{ form_row(form.protected) }}
+    </div>
+</fieldset>
+
+<fieldset class="grid3">
+    <div class="widget fixed">
+        <div class="whead"><h6>{% trans from "views" %}black.bundle.config.adminConfig.fieldset.actions.header{% endtrans %}</h6>
+            <div class="clear"></div>
+        </div>
+        <div class="body">
+            {{ form_rest(form) }}
+        </div>
+        <div class="clear"></div>
+    </div>
+</fieldset>
+
+{{ elfinder_tinymce_init4() }}
+{{ tinymce_init() }}

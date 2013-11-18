@@ -1,79 +1,113 @@
-config:
-  admin:
-    breadLine:
-      shortcut:
-        text:
-          Raccourci
-      config:
-        breadcrumb:
-          a:
-            text: Votre configuration
-            title: Votre configuration
-        new:
-          text: Créer une propriété
-    
-    contentTop:
-      config:
-        text: Configuration
-        edit:
-          text: Editer une propriété
-        general:
-          text: Configuration générale
-        new:
-          text: Créer une propriété
-        mail:
-          text: Configuration mail
-    
-    fieldset:
-      config:
-        edit:
-          text: Modifier la propriété
-        general:
-          text: Configuration générale
-        new:
-          text: Nouvelle propriété
-        mail:
-          text: Configuration mail
-    
-    general:
-      actions:
-        text: Actions
-    
-    index:
-      config:
-        text: Configuration
-    
-    js:
-      remove:
-        text: Enlever
-    
-    mail:
-      actions:
-        text: Actions
-        
-    mainNav:
-      config:
-        a:
-          title: Configuration
-          text: Configuration
-        img:
-          alt: Configuration
-          
-    row:
-      show:
-        title: Voir
-            
-    sidebar:
-      config:
-        text: Configuration
-        a:
-          text: Liste des paramètres
-          title: Accéder à la liste de vos paramètres
-        general:
-          a:
-            text: Paramètres généraux
-            title: Accéder à vos paramètres généraux
-        mail:
-          a:
-            text: Paramètres mail
-            title: Accéder à vos paramètres de mail
+black:
+    bundle:
+        config:
+            admin:
+                breadLine:
+                    dashboard:
+                        a:
+                            text: Tableau de bord
+                    shortcut:
+                        text: Raccourci
+                        title: Acceder au raccourci
+                    config:
+                        breadcrumb:
+                            a:
+                                text: Votre configuration
+                                title: Votre configuration
+                        new:
+                            text: Créer une propriété
+                mainNav:
+                    config:
+                        a:
+                            title: Configuration
+                            text: Configuration
+                        img:
+                            alt: Configurationblack.bundle.
+                mail:
+                    actions:
+                        text: Actions
+                    update:
+                        submit:
+                            value: Mettre à jour
+
+            adminConfig:
+                base:
+                    contentTop:
+                        config:
+                            text: Configuration
+                            general:
+                                text: Configuration générale
+                                actions:
+                                    text: Actions
+                    general:
+                        actions:
+                            text: Actions
+                            submit:
+                                value: Mettre à jour
+                                title: Mettre à jour les données
+                    breadLine:
+                        new:
+                            text: Créer une propriété
+                        config:
+                            breadcrumb:
+                                a:
+                                    text: Votre configuration
+                                    title: Votre configuration
+                edit:
+                    contentTop:
+                        config:
+                            edit:
+                                text: Editer une propriété
+
+                    fieldset:
+                        config:
+                            edit:
+                                text: Modifier la propriété
+                fieldset:
+                    config:
+                        edit:
+                            text: Modifier la propriété
+                        mail:
+                            text: Configuration mail
+                    actions:
+                        header: Actions
+                    general:
+                        header: Nouvelle propriété
+                index:
+                    contentTop:
+                        config:
+                            text: Configuration
+                        mail:
+                            text: Configuration mail
+                new:
+                    contentTop:
+                        config:
+                            new:
+                                text: Configuration
+                    fieldset:
+                        config:
+                            new:
+                                text: Nouvelle propriété
+                sidebar:
+                    config:
+                        text: Configuration
+                        a:
+                            text: Liste des paramètres
+                            title: Accéder à la liste de vos paramètres
+                        general:
+                            a:
+                                text: Paramètres généraux
+                                title: Accéder à vos paramètres généraux
+                        mail:
+                            a:
+                                text: Paramètres mail
+                                title: Accéder à vos paramètres de mail
+                        page:
+                            a:
+                                text: Paramètres page
+                                title: Accéder à vos paramètres de pages
+
+
+
+
+

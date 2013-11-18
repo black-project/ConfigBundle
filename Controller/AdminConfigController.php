@@ -18,6 +18,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Black\Bundle\ConfigBundle\Form\Type;
 use Symfony\Component\Serializer\Exception;
+use Black\Bundle\ConfigBundle\Exception\ConfigNotFoundException;
 
 /**
  * Class AdminConfigController
@@ -106,7 +107,7 @@ class AdminConfigController extends Controller
         $document           = $documentManager->findPropertyById($id);
 
         if (!$document) {
-            throw $this->createNotFoundException('Unable to find Config document.');
+            throw new ConfigNotFoundException();
         }
 
         $formHandler    = $this->get('black_config.config.form.main.handler');
@@ -138,7 +139,7 @@ class AdminConfigController extends Controller
         $form       = $this->createDeleteForm($id);
         $request    = $this->getRequest();
 
-        $form->bind($request);
+        $form->handleRequest($request);
 
         if (null !== $token) {
             $token = $this->get('form.csrf_provider')->isCsrfTokenValid('delete' . $id, $token);
@@ -150,12 +151,12 @@ class AdminConfigController extends Controller
             $document = $dm->findPropertyById($id);
 
             if (!$document) {
-                throw $this->createNotFoundException('Unable to find Config document.');
+                throw new ConfigNotFoundException();
             }
 
             $dm->removeAndFlush($document);
 
-            $this->get('session')->getFlashbag()->add('success', 'success.config.admin.config.delete');
+            $this->get('session')->getFlashbag()->add('success', 'black.bundle.config.success.config.admin.config.delete');
 
         }
 
@@ -176,12 +177,12 @@ class AdminConfigController extends Controller
         $token      = $this->get('form.csrf_provider')->isCsrfTokenValid('batch', $request->get('token'));
 
         if (!$ids = $request->get('ids')) {
-            $this->get('session')->getFlashbag()->add('error', 'error.config.admin.config.no.item');
+            $this->get('session')->getFlashbag()->add('error', 'black.bundle.config.error.config.admin.config.no.item');
             return $this->redirect($this->generateUrl('admin_config'));
         }
 
         if (!$action = $request->get('batchAction')) {
-            $this->get('session')->getFlashBag()->add('error', 'error.config.admin.config.no.action');
+            $this->get('session')->getFlashBag()->add('error', 'black.bundle.config.error.config.admin.config.no.action');
             return $this->redirect($this->generateUrl('admin_config'));
         }
 
@@ -192,7 +193,7 @@ class AdminConfigController extends Controller
         }
 
         if (false === $token) {
-            $this->get('session')->getFlashBag()->add('error', 'error.config.admin.config.crsf');
+            $this->get('session')->getFlashBag()->add('error', 'black.bundle.config.error.config.admin.config.crsf');
 
             return $this->redirect($this->generateUrl('admin_config'));
         }
