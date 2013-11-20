@@ -36,7 +36,8 @@ class ConfigType extends AbstractType
     protected $eventSubscriber;
 
     /**
-     * @param string $class The Person class name
+     * @param                          $class
+     * @param EventSubscriberInterface $eventSubscriber
      */
     public function __construct($class, EventSubscriberInterface $eventSubscriber)
     {

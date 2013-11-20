@@ -21,8 +21,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Black\Bundle\ConfigBundle\Form\Type;
 use Black\Bundle\ConfigBundle\Exception\ConfigNotFoundException;
-use Black÷Bundle\ConfigBundle\Form\Handler\ConfigFormHandler;
+use Black\Bundle\ConfigBundle\Form\Handler\ConfigFormHandler;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Black\Bundle\ConfigBundle\Model\ConfigManagerInterface;
 
 /**
  * Class AdminConfigController
@@ -44,7 +46,7 @@ class AdminConfigController implements ConfigControllerInterface
      */
     protected $csrf;
     /**
-     * @var \Black÷Bundle\ConfigBundle\Form\Handler\ConfigFormHandler
+     * @var \Black\Bundle\ConfigBundle\Form\Handler\ConfigFormHandler
      */
     protected $handler;
     /**
@@ -71,10 +73,10 @@ class AdminConfigController implements ConfigControllerInterface
     public function __construct(
         ConfigManagerInterface $configManager,
         ConfigFormHandler $handler,
-        Request $request,
         CsrfProviderInterface $csrf,
-        SessionInterface $session,
-        Router $router
+        Request $request,
+        Router $router,
+        SessionInterface $session
     )
     {
         $this->configManager    = $configManager;
@@ -100,8 +102,8 @@ class AdminConfigController implements ConfigControllerInterface
 
         $token      = $this->csrf->isCsrfTokenValid('batch', $request->get('token'));
 
-        if (!$ids = $request->get('ids')) {
-            $flashBag->add('error', 'black.bundle.config.error.config.admin.config.no.item');
+        if (false === $token) {
+            $flashBag->add('error', 'black.bundle.config.error.config.admin.config.crsf');
 
             return new RedirectResponse($this->generateUrl('admin_config'));
         }
@@ -112,16 +114,16 @@ class AdminConfigController implements ConfigControllerInterface
             return new RedirectResponse($this->generateUrl('admin_config'));
         }
 
-        if (!method_exists($this, $method = $action . 'Action')) {
-            throw new \Exception(
-                sprintf('You must create a "%s" method for action "%s"', $method, $action)
-            );
-        }
-
-        if (false === $token) {
-            $flashBag->add('error', 'black.bundle.config.error.config.admin.config.crsf');
+        if (!$ids = $request->get('ids')) {
+            $flashBag->add('error', 'black.bundle.config.error.config.admin.config.no.item');
 
             return new RedirectResponse($this->generateUrl('admin_config'));
+        }
+
+        if (!method_exists($this, $method = $action . 'Action')) {
+            throw new MethodNotAllowedHttpException(
+                sprintf('You must create a "%s" method for action "%s"', $method, $action)
+            );
         }
 
         foreach ($ids as $id) {
@@ -129,7 +131,6 @@ class AdminConfigController implements ConfigControllerInterface
         }
 
         return new RedirectResponse($this->generateUrl('admin_config'));
-
     }
 
     /**
@@ -146,6 +147,7 @@ class AdminConfigController implements ConfigControllerInterface
     public function deleteAction($id, $token = null)
     {
         $form       = $this->createDeleteForm($id);
+
         $form->handleRequest($this->request);
 
         if (null !== $token) {
@@ -154,7 +156,8 @@ class AdminConfigController implements ConfigControllerInterface
 
         if ($form->isValid() || true === $token) {
 
-            $document = $this->configManager->findPropertyById($id);
+            $dm         = $this->configManager;
+            $document   = $dm->findPropertyById($id);
 
             if (!$document) {
                 throw new ConfigNotFoundException();
@@ -212,7 +215,6 @@ class AdminConfigController implements ConfigControllerInterface
     public function indexAction()
     {
         $rawDocuments  = $this->configManager->findPropertiesBy(array('protected' => false));
-        $csrf       = $this->get('form.csrf_provider');
 
         $documents = array();
 
@@ -225,7 +227,7 @@ class AdminConfigController implements ConfigControllerInterface
 
         return array(
             'documents' => $documents,
-            'csrf'      => $csrf
+            'csrf'      => $this->csrf
         );
     }
 
@@ -250,8 +252,6 @@ class AdminConfigController implements ConfigControllerInterface
             'document' => $document,
             'form'     => $this->handler->getForm()->createView()
         );
-
-
     }
 
     /**
