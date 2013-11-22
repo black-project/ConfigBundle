@@ -13,6 +13,7 @@ namespace Black\Bundle\ConfigBundle\Doctrine;
 
 use Black\Bundle\ConfigBundle\Model\ConfigInterface;
 use Black\Bundle\ConfigBundle\Model\ConfigManagerInterface;
+use Black\Bundle\CommonBundle\Doctrine\ManagerInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
@@ -22,7 +23,7 @@ use Doctrine\Common\Persistence\ObjectManager;
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class ConfigManager implements ConfigManagerInterface
+class ConfigManager implements ConfigManagerInterface, ManagerInterface
 {
     /**
      * @var array
@@ -85,15 +86,15 @@ class ConfigManager implements ConfigManagerInterface
             throw new \InvalidArgumentException(gettype($model));
         }
 
-        $this->getManager()->persist($model);
+        $this->manager->persist($model);
     }
 
     /**
-     *
+     * @return mixed|void
      */
     public function flush()
     {
-        $this->getManager()->flush();
+        $this->manager->flush();
     }
 
     /**
@@ -106,25 +107,8 @@ class ConfigManager implements ConfigManagerInterface
         if (!$model instanceof $this->class) {
             throw new \InvalidArgumentException(gettype($model));
         }
-        $this->getManager()->remove($model);
-    }
 
-    /**
-     * @param mixed $model
-     */
-    public function persistAndFlush($model)
-    {
-        $this->persist($model);
-        $this->flush();
-    }
-
-    /**
-     * @param mixed $model
-     */
-    public function removeAndFlush($model)
-    {
-        $this->getManager()->remove($model);
-        $this->getManager()->flush();
+        $this->manager->remove($model);
     }
 
     /**
@@ -147,12 +131,21 @@ class ConfigManager implements ConfigManagerInterface
     }
 
     /**
-     * @param ConfigInterface $property
+     * @return mixed
      */
-    public function updateProperty(ConfigInterface $property)
+    public function findDocuments()
     {
-        $this->getManager()->merge($property);
-        $this->getManager()->flush();
+        return $this->repository->findAll();
+    }
+
+    /**
+     * @param $value
+     *
+     * @return mixed
+     */
+    public function findDocument($value)
+    {
+        return $this->repository->findOneBy(array('id' => $value));
     }
 
     /**
@@ -162,7 +155,7 @@ class ConfigManager implements ConfigManagerInterface
      */
     public function findPropertiesBy(array $criteria)
     {
-        return $this->getRepository()->findBy($criteria);
+        return $this->repository->findBy($criteria);
     }
 
     /**
@@ -172,7 +165,7 @@ class ConfigManager implements ConfigManagerInterface
      */
     public function findPropertyById($id)
     {
-        return $this->getRepository()->find($id);
+        return $this->repository->find($id);
     }
 
     /**
@@ -182,7 +175,7 @@ class ConfigManager implements ConfigManagerInterface
      */
     public function findPropertyByName($name)
     {
-        return $this->getRepository()->findOneBy(array('name' => $name));
+        return $this->repository->findOneBy(array('name' => $name));
     }
 
     /**
@@ -202,7 +195,7 @@ class ConfigManager implements ConfigManagerInterface
             return;
         }
 
-        $this->properties = $this->getRepository()->findAll();
+        $this->properties = $this->repository->findAll();
     }
 
     /**

@@ -11,8 +11,6 @@
 
 namespace Black\Bundle\ConfigBundle\Model;
 
-use Black\Bundle\ConfigBundle\Model\ManagerInterface;
-
 /**
  * Class ConfigManagerInterface
  *
@@ -20,6 +18,6 @@ use Black\Bundle\ConfigBundle\Model\ManagerInterface;
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-interface ConfigManagerInterface extends ManagerInterface
+interface ConfigManagerInterface
 {
 }

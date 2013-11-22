@@ -4,14 +4,19 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
+    <parameters>
+        <parameter key="black_config.exception.class">Black\Bundle\ConfigBundle\Exception\ConfigNotFoundException</parameter>
+    </parameters>
+
     <services>
-        <service id="black_config.controller.admin_config" class="%black_config.controller.class.admin_config%" scope="request">
+
+        <service id="black_config.exception.config" class="%black_config.exception.class%" />
+
+        <service id="black_config.controller.config" class="%black_config.controller.class.config%" scope="request">
+            <argument type="service" id="black_common.controller.common" />
+            <argument type="service" id="black_config.exception.config" />
             <argument type="service" id="black_config.manager.config" />
             <argument type="service" id="black_config.config.form.main.handler" />
-            <argument type="service" id="form.csrf_provider" />
-            <argument type="service" id="request" />
-            <argument type="service" id="router" />
-            <argument type="service" id="session" />
         </service>
     </services>
 </container>

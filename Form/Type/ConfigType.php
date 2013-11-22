@@ -33,16 +33,16 @@ class ConfigType extends AbstractType
     /**
      * @var \Symfony\Component\EventDispatcher\EventSubscriberInterface
      */
-    protected $eventSubscriber;
+    protected $buttonSubscriber;
 
     /**
      * @param                          $class
-     * @param EventSubscriberInterface $eventSubscriber
+     * @param EventSubscriberInterface $buttonSubscriber
      */
-    public function __construct($class, EventSubscriberInterface $eventSubscriber)
+    public function __construct($class, EventSubscriberInterface $buttonSubscriber)
     {
         $this->class            = $class;
-        $this->eventSubscriber  = $eventSubscriber;
+        $this->buttonSubscriber  = $buttonSubscriber;
     }
 
     /**
@@ -51,20 +51,20 @@ class ConfigType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->addEventSubscriber($this->eventSubscriber);
+        $builder->addEventSubscriber($this->buttonSubscriber);
 
         $builder
             ->add('name', 'text', array(
-                    'label' => 'black.bundle.config.admin.config.name.text'
+                    'label' => 'black.bundle.config.admin.config.name.label'
                 )
             )
             ->add('value', 'textarea', array(
-                    'label' => 'black.bundle.config.admin.config.value.text'
+                    'label' => 'black.bundle.config.admin.config.value.label'
                 )
             )
             ->add('protected', 'checkbox', array(
                     'required'  => false,
-                    'label'     => 'black.bundle.config.admin.config.protected.text'
+                    'label'     => 'black.bundle.config.admin.config.protected.label'
                 )
             );
     }

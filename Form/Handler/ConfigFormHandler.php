@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Black\Bundle\ConfigBundle\Model\ConfigInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
+use Black\Bundle\CommonBundle\Form\Handler\HandlerInterface;
 
 /**
  * Class ConfigFormHandler
@@ -26,7 +27,7 @@ use Symfony\Component\Routing\RouterInterface;
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class ConfigFormHandler
+class ConfigFormHandler implements HandlerInterface
 {
     /**
      * @var \Black\Bundle\ConfigBundle\Model\ConfigManagerInterface
@@ -81,9 +82,10 @@ class ConfigFormHandler
 
     /***
      * @param ConfigInterface $config
+     *
      * @return bool
      */
-    public function process(ConfigInterface $config)
+    public function process($config)
     {
         $this->form->setData($config);
 
@@ -149,13 +151,13 @@ class ConfigFormHandler
         }
 
         if ($this->form->get('save')->isClicked()) {
-            $this->setUrl($this->generateUrl('admin_config_edit', array('id' => $config->getId())));
+            $this->setUrl($this->generateUrl('config_update', array('value' => $config->getId())));
 
             return true;
         }
 
         if ($this->form->get('saveAndAdd')->isClicked()) {
-            $this->setUrl($this->generateUrl('admin_config_new'));
+            $this->setUrl($this->generateUrl('config_create'));
 
             return true;
         }
@@ -172,7 +174,7 @@ class ConfigFormHandler
         $this->configManager->flush();
 
         $this->setFlash('success', 'success.page.admin.page.delete');
-        $this->setUrl($this->generateUrl('admin_config_index'));
+        $this->setUrl($this->generateUrl('config_index'));
 
         return true;
     }
