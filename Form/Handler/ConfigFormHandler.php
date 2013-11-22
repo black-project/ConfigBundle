@@ -64,23 +64,34 @@ class ConfigFormHandler implements HandlerInterface
      */
     protected $url;
 
+    protected $parameters;
+
     /**
      * @param FormInterface          $form
      * @param ConfigManagerInterface $configManager
      * @param Request                $request
      * @param RouterInterface        $router
      * @param SessionInterface       $session
+     * @param array                  $parameters
      */
-    public function __construct(FormInterface $form, ConfigManagerInterface $configManager, Request $request, RouterInterface $router, SessionInterface $session)
+    public function __construct(
+        FormInterface $form,
+        ConfigManagerInterface $configManager,
+        Request $request,
+        RouterInterface $router,
+        SessionInterface $session,
+        array $parameters = array()
+    )
     {
         $this->form             = $form;
         $this->configManager    = $configManager;
         $this->request          = $request;
         $this->router           = $router;
         $this->session          = $session;
+        $this->parameters       = $parameters;
     }
 
-    /***
+    /**
      * @param ConfigInterface $config
      *
      * @return bool
@@ -151,30 +162,30 @@ class ConfigFormHandler implements HandlerInterface
         }
 
         if ($this->form->get('save')->isClicked()) {
-            $this->setUrl($this->generateUrl('config_update', array('value' => $config->getId())));
+            $this->setUrl($this->generateUrl($this->parameters['route']['update'], array('value' => $config->getId())));
 
             return true;
         }
 
         if ($this->form->get('saveAndAdd')->isClicked()) {
-            $this->setUrl($this->generateUrl('config_create'));
+            $this->setUrl($this->generateUrl($this->parameters['route']['create']));
 
             return true;
         }
     }
 
     /**
-     * @param $config
+     * @param ConfigInterface $config
      *
-     * @return bool
+     * @return mixed
      */
-    protected function onDelete($config)
+    protected function onDelete(ConfigInterface $config)
     {
         $this->configManager->remove($config);
         $this->configManager->flush();
 
         $this->setFlash('success', 'success.page.admin.page.delete');
-        $this->setUrl($this->generateUrl('config_index'));
+        $this->setUrl($this->generateUrl($this->parameters['route']['index']));
 
         return true;
     }
