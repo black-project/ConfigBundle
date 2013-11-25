@@ -64,8 +64,13 @@ class BlackConfigExtension extends Extension
                 )
             )
         );
+
         if (!empty($config['config'])) {
             $this->loadConfig($config['config'], $container, $loader);
+        }
+
+        if (!empty($config['controller'])) {
+            $this->loadController($config['controller'], $container, $loader);
         }
     }
 
@@ -82,7 +87,25 @@ class BlackConfigExtension extends Extension
             $config,
             $container,
             array(
-                'form' => 'black_config.config.form.%s',
+                'form'  => 'black_config.config.form.%s',
+            )
+        );
+    }
+
+    /**
+     * @param array            $config
+     * @param ContainerBuilder $container
+     * @param XmlFileLoader    $loader
+     */
+    private function loadController(array $config, ContainerBuilder $container, XmlFileLoader $loader)
+    {
+        $loader->load('controller.xml');
+
+        $this->remapParametersNamespaces(
+            $config,
+            $container,
+            array(
+                'class'    => 'black_config.controller.class.%s',
             )
         );
     }
@@ -109,7 +132,6 @@ class BlackConfigExtension extends Extension
     protected function remapParametersNamespaces(array $config, ContainerBuilder $container, array $namespaces)
     {
         foreach ($namespaces as $ns => $map) {
-
             if ($ns) {
                 if (!array_key_exists($ns, $config)) {
                     continue;

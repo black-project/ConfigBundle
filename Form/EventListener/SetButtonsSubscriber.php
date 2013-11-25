@@ -52,7 +52,7 @@ class SetButtonsSubscriber implements EventSubscriberInterface
             ->add('save', 'submit', array(
                     'label' => 'black.bundle.config.admin.eventListener.setButtonsSubscriber.button.save.label',
                     'attr' => array(
-                        'class' => 'buttonL bBlue floatL mb10 mr10',
+                        'class' => 'btn btn-success',
 
                     )
                 )
@@ -60,7 +60,7 @@ class SetButtonsSubscriber implements EventSubscriberInterface
             ->add('reset', 'reset', array(
                     'label' => 'black.bundle.config.admin.eventListener.setButtonsSubscriber.button.reset.label',
                     'attr' => array(
-                        'class' => 'buttonL bDefault floatL mb10 mr10',
+                        'class' => 'btn',
                     )
                 )
             );
