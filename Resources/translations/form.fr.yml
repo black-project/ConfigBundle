@@ -4,11 +4,11 @@ black:
             admin:
                 config:
                     name:
-                        text: Nom de la propriété
+                        label: Nom de la propriété
                     value:
-                        text: Valeur
+                        label: Valeur
                     protected:
-                        text: Vous voulez protéger la propriété ? Cochez cette case pour en désactiver l'administration.
+                        label: Vous voulez protéger la propriété ? Cochez cette case pour en désactiver l'administration.
 
                 general:
                     update:

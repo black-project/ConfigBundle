@@ -52,6 +52,7 @@ class Configuration implements ConfigurationInterface
             ->end();
 
         $this->addConfigSection($rootNode);
+        $this->addControllerSection($rootNode);
 
         return $treeBuilder;
     }
@@ -77,6 +78,30 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('main_handler')->defaultValue(
                                     'Black\\Bundle\\ConfigBundle\\Form\\Handler\\ConfigFormHandler'
                                 )->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+
+    /**
+     * @param ArrayNodeDefinition $node
+     */
+    private function addControllerSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('controller')
+                    ->addDefaultsIfNotSet()
+                    ->canBeUnset()
+                    ->children()
+                        ->arrayNode('class')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('config')
+                                    ->defaultValue('Black\\Bundle\\ConfigBundle\\Controller\\ConfigController')
+                                ->end()
                             ->end()
                         ->end()
                     ->end()

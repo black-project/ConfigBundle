@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Black\Bundle\ConfigBundle\Model\ConfigInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
+use Black\Bundle\CommonBundle\Form\Handler\HandlerInterface;
 
 /**
  * Class ConfigFormHandler
@@ -26,7 +27,7 @@ use Symfony\Component\Routing\RouterInterface;
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class ConfigFormHandler
+class ConfigFormHandler implements HandlerInterface
 {
     /**
      * @var \Black\Bundle\ConfigBundle\Model\ConfigManagerInterface
@@ -63,27 +64,39 @@ class ConfigFormHandler
      */
     protected $url;
 
+    protected $parameters;
+
     /**
      * @param FormInterface          $form
      * @param ConfigManagerInterface $configManager
      * @param Request                $request
      * @param RouterInterface        $router
      * @param SessionInterface       $session
+     * @param array                  $parameters
      */
-    public function __construct(FormInterface $form, ConfigManagerInterface $configManager, Request $request, RouterInterface $router, SessionInterface $session)
+    public function __construct(
+        FormInterface $form,
+        ConfigManagerInterface $configManager,
+        Request $request,
+        RouterInterface $router,
+        SessionInterface $session,
+        array $parameters = array()
+    )
     {
         $this->form             = $form;
         $this->configManager    = $configManager;
         $this->request          = $request;
         $this->router           = $router;
         $this->session          = $session;
+        $this->parameters       = $parameters;
     }
 
-    /***
+    /**
      * @param ConfigInterface $config
+     *
      * @return bool
      */
-    public function process(ConfigInterface $config)
+    public function process($config)
     {
         $this->form->setData($config);
 
@@ -149,30 +162,30 @@ class ConfigFormHandler
         }
 
         if ($this->form->get('save')->isClicked()) {
-            $this->setUrl($this->generateUrl('admin_config_edit', array('id' => $config->getId())));
+            $this->setUrl($this->generateUrl($this->parameters['route']['update'], array('value' => $config->getId())));
 
             return true;
         }
 
         if ($this->form->get('saveAndAdd')->isClicked()) {
-            $this->setUrl($this->generateUrl('admin_config_new'));
+            $this->setUrl($this->generateUrl($this->parameters['route']['create']));
 
             return true;
         }
     }
 
     /**
-     * @param $config
+     * @param ConfigInterface $config
      *
-     * @return bool
+     * @return mixed
      */
-    protected function onDelete($config)
+    protected function onDelete(ConfigInterface $config)
     {
         $this->configManager->remove($config);
         $this->configManager->flush();
 
         $this->setFlash('success', 'success.page.admin.page.delete');
-        $this->setUrl($this->generateUrl('admin_config_index'));
+        $this->setUrl($this->generateUrl($this->parameters['route']['index']));
 
         return true;
     }

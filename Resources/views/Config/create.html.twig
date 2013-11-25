@@ -1,0 +1,12 @@
+{% extends 'BlackConfigBundle:Config:base.html.twig' %}
+
+{% block body %}
+    <header>
+        <h2>Config Edit</h2>
+    </header>
+
+    <form id="validate" class="main" action="{{ path('config_create') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_rest(form) }}
+    </form>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'BlackConfigBundle:Config:base.html.twig' %}
+
+{% block body %}
+    <header>
+        <h2>Config Index</h2>
+    </header>
+
+    <table id="table-config" class="table table-stripped table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for document in documents %}
+            <tr>
+                <td>{{ document.id }}</td>
+                <td>{{ document.name }}</td>
+                <td>
+                    <a class="btn" href="{{ url('config_show', {'value': document.id}, true) }}"><i class="icon-eye-open"></i></a>
+                    <a class="btn btn-primary" href="{{ url('config_update', {'value': document.id}, true) }}"><i class="icon-edit icon-white"></i></a>
+                    <a class="btn btn-danger" href="{{ url('config_delete', {'value': document.id}, true) }}"><i class="icon-remove icon-white"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <td colspan="3">
+                    <a class="btn btn-success" href="{{ url('config_create', {}, true) }}"><i class="icon-pencil icon-white"></i> New</a>
+                </td>
+            </tr>
+        </tfoot>
+
+    </table>
+
+{% endblock %}
