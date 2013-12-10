@@ -50,7 +50,7 @@ class SetButtonsSubscriber implements EventSubscriberInterface
     {
         $form
             ->add('save', 'submit', array(
-                    'label' => 'black.bundle.config.admin.eventListener.setButtonsSubscriber.button.save.label',
+                    'label' => 'black.bundle.config.eventListener.setButtonsSubscriber.button.save.label',
                     'attr' => array(
                         'class' => 'btn btn-success',
 
@@ -58,7 +58,7 @@ class SetButtonsSubscriber implements EventSubscriberInterface
                 )
             )
             ->add('reset', 'reset', array(
-                    'label' => 'black.bundle.config.admin.eventListener.setButtonsSubscriber.button.reset.label',
+                    'label' => 'black.bundle.config.eventListener.setButtonsSubscriber.button.reset.label',
                     'attr' => array(
                         'class' => 'btn',
                     )

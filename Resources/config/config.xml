@@ -19,17 +19,7 @@
 
         <service id="black_config.config.form.main.handler" class="%black_config.config.form.main_handler%" scope="request" public="true">
             <argument type="service" id="black_config.config.form.main" />
-            <argument type="service" id="black_config.manager.config" />
-            <argument type="service" id="request" />
-            <argument type="service" id="router" />
-            <argument type="service" id="session" />
-            <argument type="collection">
-                <argument key="route" type="collection">
-                    <argument key="index">config_index</argument>
-                    <argument key="create">config_create</argument>
-                    <argument key="update">config_update</argument>
-                </argument>
-            </argument>
+            <argument type="service" id="black_config.configuration.config" />
         </service>
     </services>
 </container>

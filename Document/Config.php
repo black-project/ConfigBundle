@@ -41,40 +41,4 @@ abstract class Config extends AbstractConfig
      * @ODM\Boolean()
      */
     protected $protected;
-
-    /**
-     *
-     */
-    public function upload()
-    {
-        if (!isset($this->value['picture'])) {
-            return;
-        }
-
-        if (null === $this->value['picture']) {
-            return;
-        }
-
-        $this->value['site_logo'] = sha1(uniqid(mt_rand(), true)) . '.' . $this->value['picture']->guessExtension();
-        $this->value['picture']->move($this->getUploadRootDir(), $this->value['site_logo']);
-
-        unset($this->value['picture']);
-    }
-
-    /**
-     * @ODM\PostRemove()
-     */
-    public function removeUpload()
-    {
-        if ($image = $this->getAbsolutePath()) {
-            unlink($image);
-        }
-    }
-
-    /**
-     * @ODM\PreRemove
-     */
-    public function onRemove()
-    {
-    }
 }

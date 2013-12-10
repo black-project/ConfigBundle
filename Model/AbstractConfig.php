@@ -38,10 +38,20 @@ abstract class AbstractConfig implements ConfigInterface
     /**
      * @var string
      */
-    protected $protected = false;
+    protected $protected;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->protected = false;
+    }
 
     /**
      * {@inheritdoc}
+     *
+     * @return int|mixed
      */
     public function getId()
     {
@@ -50,6 +60,8 @@ abstract class AbstractConfig implements ConfigInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @return mixed|string
      */
     public function getName()
     {
@@ -57,7 +69,11 @@ abstract class AbstractConfig implements ConfigInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Set the name of the document
+     *
+     * @param $name
+     *
+     * @return $this
      */
     public function setName($name)
     {
@@ -68,6 +84,8 @@ abstract class AbstractConfig implements ConfigInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @return mixed|string
      */
     public function getValue()
     {
@@ -75,7 +93,11 @@ abstract class AbstractConfig implements ConfigInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Set the value of the document
+     *
+     * @param $value
+     *
+     * @return $this
      */
     public function setValue($value)
     {
@@ -85,7 +107,11 @@ abstract class AbstractConfig implements ConfigInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Set the protected status of your document
+     *
+     * @param $protected
+     *
+     * @return $this
      */
     public function setProtected($protected)
     {
@@ -96,56 +122,11 @@ abstract class AbstractConfig implements ConfigInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @return bool|mixed|string
      */
     public function getProtected()
     {
         return $this->protected;
-    }
-
-    /**
-     *
-     */
-    public function upload()
-    {
-        if (null === $this->value['picture']) {
-            return;
-        }
-
-        $this->value['site_logo'] = sha1(uniqid(mt_rand(), true)) . '.' . $this->value['picture']->guessExtension();
-        $this->value['picture']->move($this->getUploadRootDir(), $this->value['site_logo']);
-
-        unset($this->value['picture']);
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getAbsolutePath()
-    {
-        return null === $this->value['site_logo'] ? null : $this->getUploadRootDir() . '/' . $this->value['site_logo'];
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getWebPath()
-    {
-        return null === $this->value['site_logo'] ? null : $this->getUploadDir() . '/' . $this->value['site_logo'];
-    }
-
-    /**
-     * @return string
-     */
-    protected function getUploadRootDir()
-    {
-        return __DIR__ . '/../../../../../../web/' . $this->getUploadDir();
-    }
-
-    /**
-     * @return string
-     */
-    protected function getUploadDir()
-    {
-        return 'uploads/settings';
     }
 }

@@ -2,10 +2,12 @@
 
 {% block body %}
     <header>
-        <h2>Config Edit</h2>
+        <h2>{% trans from "views" %}black.bundle.config.create.title{% endtrans %}</h2>
     </header>
 
-    <form id="validate" class="main" action="{{ path('config_create') }}" method="post" {{ form_enctype(form) }}>
+    {% include 'BlackAssetsBundle:Flash:flash.html.twig' %}
+
+    <form id="validate" class="main" action="{{ url('config_create', {}, true) }}" method="post" {{ form_enctype(form) }}>
         {{ form_rest(form) }}
     </form>
 

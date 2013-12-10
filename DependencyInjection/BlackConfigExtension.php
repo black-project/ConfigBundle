@@ -11,11 +11,10 @@
 
 namespace Black\Bundle\ConfigBundle\DependencyInjection;
 
-use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Loader;
 
 /**
  * Class BlackConfigExtension
@@ -31,11 +30,10 @@ class BlackConfigExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $processor      = new Processor();
-        $configuration  = new Configuration();
-        $config         = $processor->processConfiguration($configuration, $configs);
+        $configuration  = new Configuration($this->getAlias());
+        $config         = $this->processConfiguration($configuration, $configs);
 
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         if (!isset($config['db_driver'])) {
             throw new \InvalidArgumentException('You must provide the black_config.db_driver configuration');
@@ -49,7 +47,7 @@ class BlackConfigExtension extends Extension
             );
         }
 
-        foreach (array('twig', 'services') as $basename) {
+        foreach (array('services', 'configuration') as $basename) {
             $loader->load(sprintf('%s.xml', $basename));
         }
 
@@ -75,11 +73,11 @@ class BlackConfigExtension extends Extension
     }
 
     /**
-     * @param array            $config
-     * @param ContainerBuilder $container
-     * @param XmlFileLoader    $loader
+     * @param array                $config
+     * @param ContainerBuilder     $container
+     * @param Loader\XmlFileLoader $loader
      */
-    private function loadConfig(array $config, ContainerBuilder $container, XmlFileLoader $loader)
+    private function loadConfig(array $config, ContainerBuilder $container, Loader\XmlFileLoader $loader)
     {
         $loader->load('config.xml');
 
@@ -93,11 +91,11 @@ class BlackConfigExtension extends Extension
     }
 
     /**
-     * @param array            $config
-     * @param ContainerBuilder $container
-     * @param XmlFileLoader    $loader
+     * @param array                $config
+     * @param ContainerBuilder     $container
+     * @param Loader\XmlFileLoader $loader
      */
-    private function loadController(array $config, ContainerBuilder $container, XmlFileLoader $loader)
+    private function loadController(array $config, ContainerBuilder $container, Loader\XmlFileLoader $loader)
     {
         $loader->load('controller.xml');
 

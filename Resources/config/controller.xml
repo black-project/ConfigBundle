@@ -9,13 +9,10 @@
     </parameters>
 
     <services>
-
         <service id="black_config.exception.config" class="%black_config.exception.class%" />
 
         <service id="black_config.controller.config" class="%black_config.controller.class.config%" scope="request">
-            <argument type="service" id="black_common.controller.common" />
-            <argument type="service" id="black_config.exception.config" />
-            <argument type="service" id="black_config.manager.config" />
+            <argument type="service" id="black_config.configuration.config" />
             <argument type="service" id="black_config.config.form.main.handler" />
         </service>
     </services>

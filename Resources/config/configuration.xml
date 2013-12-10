@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="black_config.configuration.class.config">Black\Bundle\CommonBundle\Configuration\Configuration</parameter>
+    </parameters>
+
+    <services>
+        <service id="black_config.configuration.config" class="%black_config.configuration.class.config%" scope="request">
+            <argument type="service" id="request" />
+            <argument type="service" id="router" />
+            <argument type="service" id="session" />
+            <argument type="service" id="black_config.exception.config" />
+            <argument type="service" id="black_config.manager.config" />
+            <argument type="collection">
+                <argument key="route" type="collection">
+                    <argument key="index">config_index</argument>
+                    <argument key="create">config_create</argument>
+                    <argument key="update">config_update</argument>
+                </argument>
+            </argument>
+        </service>
+    </services>
+</container>

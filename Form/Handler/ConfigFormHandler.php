@@ -11,14 +11,10 @@
 
 namespace Black\Bundle\ConfigBundle\Form\Handler;
 
-use Black\Bundle\ConfigBundle\Model\ConfigManagerInterface;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Black\Bundle\ConfigBundle\Model\ConfigInterface;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Routing\RouterInterface;
+use Black\Bundle\CommonBundle\Configuration\Configuration;
 use Black\Bundle\CommonBundle\Form\Handler\HandlerInterface;
+use Black\Bundle\ConfigBundle\Model\ConfigInterface;
 
 /**
  * Class ConfigFormHandler
@@ -30,65 +26,29 @@ use Black\Bundle\CommonBundle\Form\Handler\HandlerInterface;
 class ConfigFormHandler implements HandlerInterface
 {
     /**
-     * @var \Black\Bundle\ConfigBundle\Model\ConfigManagerInterface
-     */
-    protected $configManager;
-
-    /**
      * @var \Symfony\Component\Form\FormInterface
      */
     protected $form;
-
     /**
      * @var
      */
-    protected $factory;
-
-    /**
-     * @var \Symfony\Component\HttpFoundation\Request
-     */
-    protected $request;
-
-    /**
-     * @var \Symfony\Component\Routing\RouterInterface
-     */
-    protected $router;
-
-    /**
-     * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
-     */
-    protected $session;
-
+    protected $configuration;
     /**
      * @var
      */
     protected $url;
 
-    protected $parameters;
-
     /**
-     * @param FormInterface          $form
-     * @param ConfigManagerInterface $configManager
-     * @param Request                $request
-     * @param RouterInterface        $router
-     * @param SessionInterface       $session
-     * @param array                  $parameters
+     * @param FormInterface $form
+     * @param Configuration $configuration
      */
     public function __construct(
         FormInterface $form,
-        ConfigManagerInterface $configManager,
-        Request $request,
-        RouterInterface $router,
-        SessionInterface $session,
-        array $parameters = array()
+        Configuration $configuration
     )
     {
         $this->form             = $form;
-        $this->configManager    = $configManager;
-        $this->request          = $request;
-        $this->router           = $router;
-        $this->session          = $session;
-        $this->parameters       = $parameters;
+        $this->configuration    = $configuration;
     }
 
     /**
@@ -100,9 +60,9 @@ class ConfigFormHandler implements HandlerInterface
     {
         $this->form->setData($config);
 
-        if ('POST' === $this->request->getMethod()) {
+        if ('POST' === $this->configuration->getRequest()->getMethod()) {
 
-            $this->form->handleRequest($this->request);
+            $this->form->handleRequest($this->configuration->getRequest());
 
             if ($this->form->has('delete') && $this->form->get('delete')->isClicked()) {
                 return $this->onDelete($config);
@@ -147,28 +107,34 @@ class ConfigFormHandler implements HandlerInterface
      */
     protected function onSave(ConfigInterface $config)
     {
-        $config->upload();
-
         if (!$config->getId()) {
-            $this->configManager->persist($config);
+            $this->configuration->getManager()->persist($config);
         }
 
-        $this->configManager->flush();
+        $this->configuration->getManager()->flush();
 
         if (true === $config->getProtected()) {
-            $this->setUrl($this->request->headers->get('referer'));
+            $this->setUrl($this->configuration->getRequest()->headers->get('referer'));
+            $this->configuration->setFlash('success', 'black.bundle.config.handler.flash.protected');
 
             return true;
         }
 
+        if (!$config->getId()) {
+            $this->configuration->setFlash('success', 'black.bundle.config.handler.flash.create');
+        } else {
+            $this->configuration->setFlash('success', 'black.bundle.config.handler.flash.update');
+        }
+
+
         if ($this->form->get('save')->isClicked()) {
-            $this->setUrl($this->generateUrl($this->parameters['route']['update'], array('value' => $config->getId())));
+            $this->setUrl($this->configuration->generateUrl($this->configuration->getParameter('route')['update'], array('value' => $config->getId())));
 
             return true;
         }
 
         if ($this->form->get('saveAndAdd')->isClicked()) {
-            $this->setUrl($this->generateUrl($this->parameters['route']['create']));
+            $this->setUrl($this->configuration->generateUrl($this->configuration->getParameter('route')['create']));
 
             return true;
         }
@@ -181,11 +147,11 @@ class ConfigFormHandler implements HandlerInterface
      */
     protected function onDelete(ConfigInterface $config)
     {
-        $this->configManager->remove($config);
-        $this->configManager->flush();
+        $this->configuration->getManager()->remove($config);
+        $this->configuration->getManager()->flush();
 
-        $this->setFlash('success', 'success.page.admin.page.delete');
-        $this->setUrl($this->generateUrl($this->parameters['route']['index']));
+        $this->configuration->setFlash('success', 'black.bundle.config.handler.flash.delete');
+        $this->setUrl($this->configuration->generateUrl($this->configuration->getParameter('route')['index']));
 
         return true;
     }
@@ -195,31 +161,8 @@ class ConfigFormHandler implements HandlerInterface
      */
     protected function onFailed()
     {
-        $this->setFlash('error', 'error.page.admin.page.not.valid');
+        $this->configuration->setFlash('error', 'black.bundle.config.handler.flash.failed');
 
         return false;
-    }
-
-    /**
-     * @param $name
-     * @param $msg
-     *
-     * @return mixed
-     */
-    protected function setFlash($name, $msg)
-    {
-        return $this->session->getFlashBag()->add($name, $msg);
-    }
-
-    /**
-     * @param       $route
-     * @param array $parameters
-     * @param       $referenceType
-     *
-     * @return mixed
-     */
-    public function generateUrl($route, $parameters = array(), $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH)
-    {
-        return $this->router->generate($route, $parameters, $referenceType);
     }
 }
