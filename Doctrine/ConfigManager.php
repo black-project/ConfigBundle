@@ -11,7 +11,6 @@
 
 namespace Black\Bundle\ConfigBundle\Doctrine;
 
-use Black\Bundle\ConfigBundle\Model\ConfigInterface;
 use Black\Bundle\ConfigBundle\Model\ConfigManagerInterface;
 use Black\Bundle\CommonBundle\Doctrine\ManagerInterface;
 use Doctrine\Common\Persistence\ObjectManager;
