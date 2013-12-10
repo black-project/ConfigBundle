@@ -25,12 +25,25 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 class Configuration implements ConfigurationInterface
 {
     /**
+     * @var
+     */
+    private $alias;
+
+    /**
+     * @param $alias
+     */
+    public function __construct($alias)
+    {
+        $this->alias = $alias;
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('black_config');
+        $rootNode = $treeBuilder->root($this->alias);
 
         $supportedDrivers = array('mongodb', 'orm');
 
@@ -71,13 +84,15 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('form')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('main_name')->defaultValue('black_config')->end()
-                                ->scalarNode('main_type')->defaultValue(
-                                    'Black\\Bundle\\ConfigBundle\\Form\\Type\\ConfigType'
-                                )->end()
-                                ->scalarNode('main_handler')->defaultValue(
-                                    'Black\\Bundle\\ConfigBundle\\Form\\Handler\\ConfigFormHandler'
-                                )->end()
+                                ->scalarNode('main_name')
+                                    ->defaultValue('black_config')
+                                ->end()
+                                ->scalarNode('main_type')
+                                    ->defaultValue('Black\\Bundle\\ConfigBundle\\Form\\Type\\ConfigType')
+                                ->end()
+                                ->scalarNode('main_handler')
+                                    ->defaultValue('Black\\Bundle\\ConfigBundle\\Form\\Handler\\ConfigFormHandler')
+                                ->end()
                             ->end()
                         ->end()
                     ->end()

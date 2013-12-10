@@ -21,21 +21,29 @@ namespace Black\Bundle\ConfigBundle\Model;
 interface ConfigInterface
 {
     /**
+     * Return The id of the document
+     *
      * @return  mixed
      */
     public function getId();
 
     /**
+     * Return the name of the document
+     *
      * @return  mixed
      */
     public function getName();
 
     /**
+     * Return the value of the document
+     *
      * @return  mixed
      */
     public function getValue();
 
     /**
+     * Return the protected status of the document
+     *
      * @return mixed
      */
     public function getProtected();

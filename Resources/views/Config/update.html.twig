@@ -2,10 +2,21 @@
 
 {% block body %}
     <header>
-        <h2>Config Edit</h2>
+        <h2 class="page-header">
+            {% trans with {'%name%': document.name } from "views" %}black.bundle.config.update.title{% endtrans %}
+            <small>
+                <a href="{{ url('config_index', {}, true) }}"
+                   title="{% trans with {'%name%': document.name } from "views" %}black.bundle.config.update.index.title{% endtrans %}">
+                    <i class="icon icon-arrow-left"></i>
+                    {% trans with {'%name%': document.name } from "views" %}black.bundle.config.update.index.text{% endtrans %}
+                </a>
+            </small>
+        </h2>
     </header>
 
-    <form id="validate" class="main" action="{{ path('config_update', { 'value': document.id }) }}"
+    {% include 'BlackAssetsBundle:Flash:flash.html.twig' %}
+
+    <form id="validate" class="main" action="{{ url('config_update', { 'value': document.id }, true) }}"
           method="post" {{ form_enctype(form) }}>
 
     {{ form_rest(form) }}

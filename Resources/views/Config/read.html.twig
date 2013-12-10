@@ -1,17 +1,35 @@
 {% extends 'BlackConfigBundle:Config:base.html.twig' %}
 
 {% block body %}
-    <header>
-        <h2>Config Show</h2>
+    <header class="page-header">
+        <h2>
+            {% trans with {'%name%': document.name } from "views" %}black.bundle.config.read.title{% endtrans %}
+            <small>
+                <a href="{{ url('config_index', {}, true) }}"
+                   title="{% trans with {'%name%': document.name } from "views" %}black.bundle.config.read.index.title{% endtrans %}">
+                    <i class="icon icon-arrow-left"></i>
+                    {% trans with {'%name%': document.name } from "views" %}black.bundle.config.read.index.text{% endtrans %}
+                   </a>
+            </small>
+        </h2>
     </header>
 
     {% if document %}
-        <h3>{{ document.name }}</h3>
+        <h3 class="page-header">
+            {{ document.name }}
+            <small>
+                <a href="{{ url('config_update', {'value': document.id}, true) }}"
+                   title="{% trans with {'%name%': document.name } from "views" %}black.bundle.config.read.update.title{% endtrans %}">
+                    {% trans with {'%name%': document.name } from "views" %}black.bundle.config.read.update.text{% endtrans %}
+                </a>
+            </small>
+            </h2>
+        </h3>
 
         {% if document.protected %}
         <div class="alert alert-info">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <strong>Important!</strong> This value is protected
+            {% trans from "views" %}black.bundle.config.read.protected{% endtrans %}
         </div>
         {% endif %}
 
@@ -19,8 +37,8 @@
         <table class="table table-stripped table-hover">
             <thead>
                 <tr>
-                    <th>Key</th>
-                    <th>Value</th>
+                    <th>{% trans from "views" %}black.bundle.config.read.key{% endtrans %}</th>
+                    <th>{% trans from "views" %}black.bundle.config.read.value{% endtrans %}</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,6 +50,8 @@
                 {% endfor %}
             </tbody>
         </table>
+        {% else %}
+            <p>{{ document.value }}</p>
         {% endif %}
     {% endif %}
 

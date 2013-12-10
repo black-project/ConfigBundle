@@ -76,8 +76,9 @@ class ConfigManager implements ConfigManagerInterface, ManagerInterface
     }
 
     /**
-     * @param object $model
+     * @param $model
      *
+     * @return mixed|void
      * @throws \InvalidArgumentException
      */
     public function persist($model)
@@ -98,8 +99,9 @@ class ConfigManager implements ConfigManagerInterface, ManagerInterface
     }
 
     /**
-     * @param object $model
+     * @param $model
      *
+     * @return mixed|void
      * @throws \InvalidArgumentException
      */
     public function remove($model)

@@ -13,7 +13,6 @@ namespace Black\Bundle\ConfigBundle\Form\Handler;
 
 use Symfony\Component\Form\FormInterface;
 use Black\Bundle\CommonBundle\Configuration\Configuration;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Black\Bundle\CommonBundle\Form\Handler\HandlerInterface;
 use Black\Bundle\ConfigBundle\Model\ConfigInterface;
 
@@ -108,8 +107,6 @@ class ConfigFormHandler implements HandlerInterface
      */
     protected function onSave(ConfigInterface $config)
     {
-        $config->upload();
-
         if (!$config->getId()) {
             $this->configuration->getManager()->persist($config);
         }
@@ -118,18 +115,26 @@ class ConfigFormHandler implements HandlerInterface
 
         if (true === $config->getProtected()) {
             $this->setUrl($this->configuration->getRequest()->headers->get('referer'));
+            $this->configuration->setFlash('success', 'black.bundle.config.handler.flash.protected');
 
             return true;
         }
 
+        if (!$config->getId()) {
+            $this->configuration->setFlash('success', 'black.bundle.config.handler.flash.create');
+        } else {
+            $this->configuration->setFlash('success', 'black.bundle.config.handler.flash.update');
+        }
+
+
         if ($this->form->get('save')->isClicked()) {
-            $this->setUrl($this->generateUrl($this->configuration->getParameter('route')['update'], array('value' => $config->getId())));
+            $this->setUrl($this->configuration->generateUrl($this->configuration->getParameter('route')['update'], array('value' => $config->getId())));
 
             return true;
         }
 
         if ($this->form->get('saveAndAdd')->isClicked()) {
-            $this->setUrl($this->generateUrl($this->configuration->getParameter('route')['create']));
+            $this->setUrl($this->configuration->generateUrl($this->configuration->getParameter('route')['create']));
 
             return true;
         }
@@ -145,8 +150,8 @@ class ConfigFormHandler implements HandlerInterface
         $this->configuration->getManager()->remove($config);
         $this->configuration->getManager()->flush();
 
-        $this->configuration->setFlash('success', 'success.page.admin.page.delete');
-        $this->setUrl($this->generateUrl($this->configuration->getParameter('route')['index']));
+        $this->configuration->setFlash('success', 'black.bundle.config.handler.flash.delete');
+        $this->setUrl($this->configuration->generateUrl($this->configuration->getParameter('route')['index']));
 
         return true;
     }
@@ -156,20 +161,8 @@ class ConfigFormHandler implements HandlerInterface
      */
     protected function onFailed()
     {
-        $this->configuration->setFlash('error', 'error.page.admin.page.not.valid');
+        $this->configuration->setFlash('error', 'black.bundle.config.handler.flash.failed');
 
         return false;
-    }
-
-    /**
-     * @param       $route
-     * @param array $parameters
-     * @param       $referenceType
-     *
-     * @return mixed
-     */
-    public function generateUrl($route, $parameters = array(), $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH)
-    {
-        return $this->configuration->getRouter()->generate($route, $parameters, $referenceType);
     }
 }

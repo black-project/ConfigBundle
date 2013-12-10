@@ -11,6 +11,7 @@
 
 namespace Black\Bundle\ConfigBundle;
 
+use Black\Bundle\ConfigBundle\DependencyInjection\BlackConfigExtension;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
@@ -22,4 +23,11 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class BlackConfigBundle extends Bundle
 {
+    /**
+     * @return BlackConfigExtension|null|\Symfony\Component\DependencyInjection\Extension\ExtensionInterface
+     */
+    public function getContainerExtension()
+    {
+        return new BlackConfigExtension();
+    }
 }

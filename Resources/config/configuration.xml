@@ -17,9 +17,9 @@
             <argument type="service" id="black_config.manager.config" />
             <argument type="collection">
                 <argument key="route" type="collection">
-                    <argument key="index">agent_index</argument>
-                    <argument key="create">agent_create</argument>
-                    <argument key="update">agent_update</argument>
+                    <argument key="index">config_index</argument>
+                    <argument key="create">config_create</argument>
+                    <argument key="update">config_update</argument>
                 </argument>
             </argument>
         </service>
