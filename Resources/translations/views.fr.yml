@@ -1,34 +1,108 @@
 black:
     bundle:
         config:
-            create:
-                title: Créer un nouveau paramètre
-            index:
-                title: Vos paramètres
-                create: Créer un nouveau paramètre
-                read: Voir le paramètre
-                update: Mettre à jour le paramètre
-                delete: Supprimer le paramètre
-            read:
-                title: Paramètre de configuration pour %name%
+            admin:
+                breadLine:
+                    dashboard:
+                        a:
+                            text: Tableau de bord
+                    shortcut:
+                        text: Raccourci
+                        title: Acceder au raccourci
+                    config:
+                        breadcrumb:
+                            a:
+                                text: Votre configuration
+                                title: Votre configuration
+                        new:
+                            text: Créer une propriété
+                mainNav:
+                    config:
+                        a:
+                            title: Configuration
+                            text: Configuration
+                        img:
+                            alt: Configurationblack.bundle.
+                mail:
+                    actions:
+                        text: Actions
+                    update:
+                        submit:
+                            value: Mettre à jour
+
+            adminConfig:
+                base:
+                    contentTop:
+                        config:
+                            text: Configuration
+                            general:
+                                text: Configuration générale
+                                actions:
+                                    text: Actions
+                    general:
+                        actions:
+                            text: Actions
+                            submit:
+                                value: Mettre à jour
+                                title: Mettre à jour les données
+                    breadLine:
+                        new:
+                            text: Créer une propriété
+                        config:
+                            breadcrumb:
+                                a:
+                                    text: Votre configuration
+                                    title: Votre configuration
+                edit:
+                    contentTop:
+                        config:
+                            edit:
+                                text: Editer une propriété
+
+                    fieldset:
+                        config:
+                            edit:
+                                text: Modifier la propriété
+                fieldset:
+                    config:
+                        edit:
+                            text: Modifier la propriété
+                        mail:
+                            text: Configuration mail
+                    actions:
+                        header: Actions
+                    general:
+                        header: Nouvelle propriété
                 index:
-                    title: Voir la liste des paramètres
-                    text: Revenir à la liste complète
-                update:
-                    title: Mettre à jour le paramètre
-                    text: Mettre à jour
-                protected: <strong>Important !</strong> Cette valeur est protégée
-                key: Clé
-                value: Valeur
-            update:
-                title: Mise à jour du paramètre %name%
-                index:
-                    title: Voir la liste des paramètres
-                    text: Revenir à la liste complète
-            handler:
-                flash:
-                    protected: Le paramètre protégé a bien été modifié
-                    create: Le paramètre a bien été créé
-                    update: Le paramètre a bien été modifié
-                    delete: Le paramètre a bien été supprimé
-                    failed: Il y a eu une erreur lors du traitement du paramètre
+                    contentTop:
+                        config:
+                            text: Configuration
+                        mail:
+                            text: Configuration mail
+                new:
+                    contentTop:
+                        config:
+                            new:
+                                text: Configuration
+                    fieldset:
+                        config:
+                            new:
+                                text: Nouvelle propriété
+                sidebar:
+                    config:
+                        text: Configuration
+                        a:
+                            text: Liste des paramètres
+                            title: Accéder à la liste de vos paramètres
+                        general:
+                            a:
+                                text: Paramètres généraux
+                                title: Accéder à vos paramètres généraux
+                        mail:
+                            a:
+                                text: Paramètres mail
+                                title: Accéder à vos paramètres de mail
+                        page:
+                            a:
+                                text: Paramètres page
+                                title: Accéder à vos paramètres de pages
