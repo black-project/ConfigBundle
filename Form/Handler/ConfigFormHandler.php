@@ -126,7 +126,6 @@ class ConfigFormHandler implements HandlerInterface
             $this->configuration->setFlash('success', 'black.bundle.config.handler.flash.update');
         }
 
-
         if ($this->form->get('save')->isClicked()) {
             $this->setUrl($this->configuration->generateUrl($this->configuration->getParameter('route')['update'], array('value' => $config->getId())));
 
