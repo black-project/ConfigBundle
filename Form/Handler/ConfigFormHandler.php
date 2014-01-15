@@ -121,9 +121,9 @@ class ConfigFormHandler implements HandlerInterface
         }
 
         if (!$config->getId()) {
-            $this->configuration->setFlash('success', 'black.bundle.config.handler.flash.create');
+            $this->configuration->setFlash('success', 'black.bundle.config.success.create');
         } else {
-            $this->configuration->setFlash('success', 'black.bundle.config.handler.flash.update');
+            $this->configuration->setFlash('success', 'black.bundle.config.success.update');
         }
 
 
@@ -150,7 +150,7 @@ class ConfigFormHandler implements HandlerInterface
         $this->configuration->getManager()->remove($config);
         $this->configuration->getManager()->flush();
 
-        $this->configuration->setFlash('success', 'black.bundle.config.handler.flash.delete');
+        $this->configuration->setFlash('success', 'black.bundle.config.success.delete');
         $this->setUrl($this->configuration->generateUrl($this->configuration->getParameter('route')['index']));
 
         return true;
@@ -161,7 +161,7 @@ class ConfigFormHandler implements HandlerInterface
      */
     protected function onFailed()
     {
-        $this->configuration->setFlash('error', 'black.bundle.config.handler.flash.failed');
+        $this->configuration->setFlash('error', 'black.bundle.config.error.failed');
 
         return false;
     }
