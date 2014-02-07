@@ -124,7 +124,7 @@ class ConfigFormHandler implements HandlerInterface
 
         if (true === $config->getProtected()) {
             $this->setUrl($this->configuration->getRequest()->headers->get('referer'));
-            $this->configuration->setFlash('success', 'black.bundle.config.handler.flash.protected');
+            $this->configuration->setFlash('success', 'black.bundle.config.success.update');
 
             return true;
         }
