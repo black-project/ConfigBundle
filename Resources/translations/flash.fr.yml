@@ -2,8 +2,8 @@ black:
     bundle:
         config:
             success:
-                create: Le paramètre de configuration a bien été créer
-                update: Le paramètre de configuration a bien été modifié
-                delete: Le paramètre de configuration a bien été supprimé
+                create: Les paramètres de configuration ont bien été créés
+                update: Les paramètres de configuration ont bien été modifiés
+                delete: Les paramètres de configuration ont bien été supprimés
             error:
-                failed: Le paramètre de configuration n'a pu être modifié
+                failed: L'édition des paramètres de configuration a rencontré un problème.
