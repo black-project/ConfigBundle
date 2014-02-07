@@ -184,7 +184,7 @@ class ConfigFormHandler implements HandlerInterface
     public function constructFooter($config)
     {
 
-        $requiredParameters = array
+        $selectedKeys = array
         (
             'organization_name',
             'organization_street_address',
@@ -196,11 +196,11 @@ class ConfigFormHandler implements HandlerInterface
 
         $footerString = '';
 
-        foreach ($requiredParameters as $param)
+        foreach ($selectedKeys as $key)
         {
-            if (array_key_exists($param,$config->getValue()))
+            if (array_key_exists($key,$config->getValue()))
             {
-                $footerString .= ' ' . $config->getValue()[$param];
+                $footerString .= ' ' . $config->getValue()[$key];
             }
         }
 
