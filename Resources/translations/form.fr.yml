@@ -20,15 +20,15 @@ black:
                         text: Nom de la propriété
                     site:
                         baseline:
-                            text: Baseline du site
+                            text: Baseline
                         footer:
-                            text: Bas du site
+                            text: Pied de page
                         logo:
                             text: Logo
                         name:
                             text: Nom du site
                         url:
-                            text: Url du site
+                            text: Adresse URL
 
                 mail:
                     update:
