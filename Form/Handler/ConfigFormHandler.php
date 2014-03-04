@@ -111,6 +111,10 @@ class ConfigFormHandler implements HandlerInterface
             $this->configuration->getManager()->persist($config);
         }
 
+        if (!$this->form->get('value')->get('picture')->isEmpty()) {
+            $config->upload();
+        }
+
         $this->configuration->getManager()->flush();
 
         if (true === $config->getProtected()) {
