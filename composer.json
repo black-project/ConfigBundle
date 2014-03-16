@@ -2,7 +2,7 @@
     "name": "black/config-bundle",
     "type": "symfony-bundle",
     "description": "Symfony BlackConfigBundle",
-    "keywords": ["Config"],
+    "keywords": ["Bundle", "Symfony", "Black"],
     "homepage": "http://www.lablackroom.com",
     "license": "MIT",
     "authors": [
