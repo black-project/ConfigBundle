@@ -30,10 +30,10 @@ class BlackConfigExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $configuration  = new Configuration($this->getAlias());
-        $config         = $this->processConfiguration($configuration, $configs);
+        $configuration = new Configuration($this->getAlias());
+        $config        = $this->processConfiguration($configuration, $configs);
 
-        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         if (!isset($config['db_driver'])) {
             throw new \InvalidArgumentException('You must provide the black_config.db_driver configuration');
@@ -47,7 +47,7 @@ class BlackConfigExtension extends Extension
             );
         }
 
-        foreach (array('services', 'configuration') as $basename) {
+        foreach (array('factory', 'command', 'services', 'configuration') as $basename) {
             $loader->load(sprintf('%s.xml', $basename));
         }
 
@@ -56,9 +56,9 @@ class BlackConfigExtension extends Extension
             $container,
             array(
                 '' => array(
-                    'db_driver'             => 'black_config.db_driver',
-                    'config_class'          => 'black_config.config.model.class',
-                    'config_manager'        => 'black_config.config.manager'
+                    'db_driver'         => 'black_config.db_driver',
+                    'config_class'      => 'black_config.config.model.class',
+                    'config_manager'    => 'black_config.config.manager'
                 )
             )
         );
