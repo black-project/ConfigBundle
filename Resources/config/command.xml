@@ -6,11 +6,19 @@
 
     <parameters>
         <parameter key="black_config.command.create_property.class">Black\Bundle\ConfigBundle\Command\CreatePropertyCommand</parameter>
+        <parameter key="black_config.command.add_parameter.class">Black\Bundle\ConfigBundle\Command\AddParameterCommand</parameter>
+        <parameter key="black_config.command.bus.parameter.class">Black\Bundle\ConfigBundle\Command\Bus\ParameterBus</parameter>
+        <parameter key="black_config.command.parameter.add_parameter_handler.class">Black\Bundle\ConfigBundle\Command\Parameter\AddParameterHandler</parameter>
+
     </parameters>
 
     <services>
         <!-- Exposed services -->
         <service id="black_config.command.property" alias="black_config.command.create_property" />
+        <service id="black_config.command.parameter" alias="black_config.command.add_parameter" />
+
+        <service id="black_config.bus.parameter" alias="black_config.command.bus.parameter" />
+        <service id="black_config.parameter.add" alias="black_config.parameter.add_parameter_handler" />
 
         <!-- Concrete implementations -->
         <service id="black_config.command.create_property" class="%black_config.command.create_property.class%">
@@ -18,6 +26,20 @@
             <argument type="service" id="black_config.manager.config" />
             <tag name="console.command" />
         </service>
+
+        <service id="black_config.command.add_parameter" class="%black_config.command.add_parameter.class%">
+            <argument type="service" id="black_config.command.bus.parameter" />
+            <argument type="service" id="black_config.manager.config" />
+            <argument type="service" id="black_config.exception.config" />
+            <tag name="console.command" />
+        </service>
+
+        <service id="black_config.command.bus.parameter" class="%black_config.command.bus.parameter.class%">
+            <argument type="service" id="black_config.manager.config" />
+            <argument type="service" id="black_config.parameter.add" />
+        </service>
+
+        <service id="black_config.parameter.add_parameter_handler" class="%black_config.command.parameter.add_parameter_handler.class%" />
 
     </services>
 
