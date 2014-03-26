@@ -33,7 +33,7 @@ abstract class Config extends AbstractConfig
     protected $name;
 
     /**
-     * @ORM\Column(name="value",type="array")
+     * @ORM\Column(name="value", type="array")
      */
     protected $value;
 
