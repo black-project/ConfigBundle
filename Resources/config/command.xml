@@ -34,12 +34,12 @@
             <tag name="console.command" />
         </service>
 
-        <service id="black_config.command.bus.parameter" class="%black_config.command.bus.parameter.class%">
+        <service id="black_config.command.bus.parameter" public="false" class="%black_config.command.bus.parameter.class%">
             <argument type="service" id="black_config.manager.config" />
             <argument type="service" id="black_config.parameter.add" />
         </service>
 
-        <service id="black_config.parameter.add_parameter_handler" class="%black_config.command.parameter.add_parameter_handler.class%" />
+        <service id="black_config.parameter.add_parameter_handler" public="false" class="%black_config.command.parameter.add_parameter_handler.class%" />
 
     </services>
 

@@ -20,4 +20,5 @@ namespace Black\Bundle\ConfigBundle\Model;
  */
 interface ConfigManagerInterface
 {
+
 }
