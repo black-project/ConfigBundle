@@ -11,8 +11,8 @@
 
 namespace Black\Bundle\ConfigBundle\Command\Parameter;
 
+use Black\Bundle\CommonBundle\Command\HandlerInterface;
 use Black\Bundle\ConfigBundle\Model\ConfigManagerInterface;
-
 
 /**
  * Class AddParameterHandler
@@ -23,7 +23,7 @@ use Black\Bundle\ConfigBundle\Model\ConfigManagerInterface;
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class AddParameterHandler
+class AddParameterHandler implements HandlerInterface
 {
     /**
      * @var AddParameterCommand

@@ -11,6 +11,7 @@
 
 namespace Black\Bundle\ConfigBundle\Command\Parameter;
 
+use Black\Bundle\CommonBundle\Command\CommandInterface;
 use Black\Bundle\ConfigBundle\Model\ConfigInterface;
 
 /**
@@ -22,7 +23,7 @@ use Black\Bundle\ConfigBundle\Model\ConfigInterface;
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class AddParameterCommand
+class AddParameterCommand implements CommandInterface
 {
     /**
      * @var \Black\Bundle\ConfigBundle\Model\ConfigInterface

@@ -11,11 +11,11 @@
 
 namespace Black\Bundle\ConfigBundle\Command\Bus;
 
+use Black\Bundle\CommonBundle\Command\BusInterface;
 use Black\Bundle\ConfigBundle\Command\Parameter\AddParameterCommand;
 use Black\Bundle\ConfigBundle\Command\Parameter\AddParameterHandler;
 use Black\Bundle\ConfigBundle\Model\ConfigInterface;
 use Black\Bundle\ConfigBundle\Model\ConfigManagerInterface;
-use Black\Bundle\UserBundle\Command\User\ActiveUserCommand;
 
 /**
  * Class ParameterBus
@@ -26,7 +26,7 @@ use Black\Bundle\UserBundle\Command\User\ActiveUserCommand;
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class ParameterBus
+class ParameterBus implements BusInterface
 {
     /**
      * @var
