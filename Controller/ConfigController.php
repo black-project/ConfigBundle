@@ -25,7 +25,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class ConfigController extends CommonController
+class ConfigController
 {
     /**
      * @Method({"GET", "POST"})
@@ -36,7 +36,7 @@ class ConfigController extends CommonController
      */
     public function createAction()
     {
-        return parent::createAction();
+        return array();
     }
 
     /**
@@ -49,7 +49,7 @@ class ConfigController extends CommonController
      */
     public function deleteAction($value)
     {
-        return parent::deleteAction($value);
+        return array();
     }
 
     /**
@@ -61,7 +61,7 @@ class ConfigController extends CommonController
      */
     public function indexAction()
     {
-        return parent::indexAction();
+        return array();
     }
 
     /**
@@ -75,7 +75,7 @@ class ConfigController extends CommonController
      */
     public function readAction($value)
     {
-        return parent::readAction($value);
+        return array();
     }
 
     /**
@@ -89,6 +89,6 @@ class ConfigController extends CommonController
      */
     public function updateAction($value)
     {
-        return parent::updateAction($value);
+        return array();
     }
 }
