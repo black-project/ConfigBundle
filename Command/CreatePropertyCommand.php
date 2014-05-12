@@ -23,7 +23,6 @@ use Symfony\Component\Console\Output\OutputInterface;
  *
  * Create new property with command tools
  *
- * @package Black\Bundle\ConfigBundle\Command
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
@@ -61,11 +60,11 @@ class CreatePropertyCommand extends Command
         $this
             ->setName('black:property:create')
             ->setDescription('Create a new property')
-            ->setDefinition(array(
+            ->setDefinition([
                 new InputArgument('name', InputArgument::REQUIRED, 'The name of the property'),
                 new InputArgument('protected', InputArgument::REQUIRED, 'The status of the property'),
                 new InputArgument('value', InputArgument::REQUIRED, 'The value of the property')
-            ));
+            ]);
     }
 
     /**
@@ -110,7 +109,7 @@ class CreatePropertyCommand extends Command
         }
 
         if (!$input->getArgument('protected')) {
-            $status    = array(true => 'yes', false => 'no');
+            $status    = [true => 'yes', false => 'no'];
             $protected = $this->getHelper('dialog')->select($output, 'Is your property is protected?', $status);
 
             $input->setArgument('protected', $protected);

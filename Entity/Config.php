@@ -20,7 +20,6 @@ use Black\Bundle\ConfigBundle\Model\AbstractConfig;
  *
  * @ORM\MappedSuperclass()
  *
- * @package Black\Bundle\ConfigBundle\Entity
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
@@ -28,7 +27,6 @@ abstract class Config extends AbstractConfig
 {
     /**
      * @ORM\Column(name="name", type="string")
-     * @Assert\NotNull
      */
     protected $name;
 

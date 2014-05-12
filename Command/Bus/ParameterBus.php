@@ -22,7 +22,6 @@ use Black\Bundle\ConfigBundle\Model\ConfigManagerInterface;
  *
  * ParameterBus get a Config object and add parameters.
  *
- * @package Black\Bundle\ConfigBundle\Command\Bus
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
@@ -65,10 +64,8 @@ class ParameterBus implements BusInterface
         $config = $this->addParameter($config, $parameters);
 
         if ($config) {
-            $this->manager->flush();
+            return $config;
         }
-
-        return true;
     }
 
     /**
@@ -84,8 +81,8 @@ class ParameterBus implements BusInterface
         $command = new AddParameterCommand($config, $parameters);
 
         $this->parameterHandler->invoke($command);
-        $this->parameterHandler->execute();
+        $config = $this->parameterHandler->execute();
 
-        return true;
+        return $config;
     }
 }

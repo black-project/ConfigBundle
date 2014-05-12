@@ -24,7 +24,6 @@ use Symfony\Component\Console\Output\OutputInterface;
  *
  * Create new property with command tools
  *
- * @package Black\Bundle\ConfigBundle\Command
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
@@ -41,27 +40,19 @@ class AddParameterCommand extends Command
     protected $configManager;
 
     /**
-     * @var \Black\Bundle\ConfigBundle\Exception\ConfigNotFoundException
-     */
-    protected $exception;
-
-    /**
      * Construct the command
      *
-     * @param ParameterBus            $bus
-     * @param ConfigManagerInterface  $configManager
-     * @param ConfigNotFoundException $exception
+     * @param ParameterBus           $bus
+     * @param ConfigManagerInterface $configManager
      */
     public function __construct(
         ParameterBus $bus,
-        ConfigManagerInterface $configManager,
-        ConfigNotFoundException $exception
+        ConfigManagerInterface $configManager
     ) {
         parent::__construct();
 
         $this->bus           = $bus;
         $this->configManager = $configManager;
-        $this->exception     = $exception;
     }
 
     /**
@@ -91,10 +82,10 @@ class AddParameterCommand extends Command
         $config = $this->configManager->findPropertyByName($name);
 
         if (!$config) {
-            return $this->exception;
+            return new ConfigNotFoundException();
         }
 
-        $process = $this->bus->handle($config, array($parameterName => $parameterValue));
+        $process = $this->bus->handle($config, [$parameterName => $parameterValue]);
 
         if ($process) {
             $this->configManager->flush();

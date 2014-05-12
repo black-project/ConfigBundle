@@ -12,11 +12,9 @@
 namespace Black\Bundle\ConfigBundle\Model;
 
 /**
- * Class ConfigManagerInterface
+ * Interface ConfigManagerInterface
  *
  * @package Black\Bundle\ConfigBundle\Model
- * @author  Alexandre Balmes <albalmes@gmail.com>
- * @license http://opensource.org/licenses/mit-license.php MIT
  */
 interface ConfigManagerInterface
 {

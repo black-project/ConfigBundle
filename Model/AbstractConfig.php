@@ -11,10 +11,11 @@
 
 namespace Black\Bundle\ConfigBundle\Model;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * Class AbstractConfig
  *
- * @package Black\Bundle\ConfigBundle\Model
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
@@ -26,6 +27,8 @@ abstract class AbstractConfig implements ConfigInterface
     protected $id;
 
     /**
+     * @Assert\NotNull
+     *
      * @var string
      */
     protected $name;
@@ -71,7 +74,7 @@ abstract class AbstractConfig implements ConfigInterface
     /**
      * Set the name of the document
      *
-     * @param $name
+     * @param string $name
      *
      * @return $this
      */
@@ -95,7 +98,7 @@ abstract class AbstractConfig implements ConfigInterface
     /**
      * Set the value of the document
      *
-     * @param $value
+     * @param string $value
      *
      * @return $this
      */
@@ -109,7 +112,7 @@ abstract class AbstractConfig implements ConfigInterface
     /**
      * Set the protected status of your document
      *
-     * @param $protected
+     * @param boolean $protected
      *
      * @return $this
      */

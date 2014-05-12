@@ -18,7 +18,6 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 /**
  * Class Configuration
  *
- * @package Black\Bundle\ConfigBundle\DependencyInjection
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
@@ -30,7 +29,7 @@ class Configuration implements ConfigurationInterface
     private $alias;
 
     /**
-     * @param $alias
+     * @param $alias string
      */
     public function __construct($alias)
     {
@@ -43,9 +42,9 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root($this->alias);
+        $rootNode    = $treeBuilder->root($this->alias);
 
-        $supportedDrivers = array('mongodb', 'orm');
+        $supportedDrivers = ['mongodb', 'orm'];
 
         $rootNode
             ->children()
@@ -64,63 +63,6 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end();
 
-        $this->addConfigSection($rootNode);
-        $this->addControllerSection($rootNode);
-
         return $treeBuilder;
-    }
-
-    /**
-     * @param ArrayNodeDefinition $node
-     */
-    private function addConfigSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-                ->arrayNode('config')
-                    ->addDefaultsIfNotSet()
-                    ->canBeUnset()
-                    ->children()
-                        ->arrayNode('form')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('main_name')
-                                    ->defaultValue('black_config')
-                                ->end()
-                                ->scalarNode('main_type')
-                                    ->defaultValue('Black\\Bundle\\ConfigBundle\\Form\\Type\\ConfigType')
-                                ->end()
-                                ->scalarNode('main_handler')
-                                    ->defaultValue('Black\\Bundle\\ConfigBundle\\Form\\Handler\\ConfigFormHandler')
-                                ->end()
-                            ->end()
-                        ->end()
-                    ->end()
-                ->end()
-            ->end();
-    }
-
-    /**
-     * @param ArrayNodeDefinition $node
-     */
-    private function addControllerSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-                ->arrayNode('controller')
-                    ->addDefaultsIfNotSet()
-                    ->canBeUnset()
-                    ->children()
-                        ->arrayNode('class')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('config')
-                                    ->defaultValue('Black\\Bundle\\ConfigBundle\\Controller\\ConfigController')
-                                ->end()
-                            ->end()
-                        ->end()
-                    ->end()
-                ->end()
-            ->end();
     }
 }

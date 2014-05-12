@@ -19,7 +19,6 @@ use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
  *
  * Create a new Config property
  *
- * @package Black\Bundle\ConfigBundle\Factory
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
@@ -52,6 +51,7 @@ class CreateProperty
     public function execute($name, $protected, $value)
     {
         $property = $this->manager->createInstance();
+
         $property
             ->setName($name)
             ->setProtected($protected)
@@ -62,4 +62,4 @@ class CreateProperty
 
         return $property;
     }
-} 
+}

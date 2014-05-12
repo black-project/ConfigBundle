@@ -19,7 +19,6 @@ use Black\Bundle\ConfigBundle\Model\ConfigManagerInterface;
  *
  * AddParameterHandler add parameters to a Config object
  *
- * @package Black\Bundle\ConfigBundle\Command\Parameter
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */

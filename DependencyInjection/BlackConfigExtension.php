@@ -19,7 +19,6 @@ use Symfony\Component\DependencyInjection\Loader;
 /**
  * Class BlackConfigExtension
  *
- * @package Black\Bundle\ConfigBundle\DependencyInjection
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
@@ -27,6 +26,9 @@ class BlackConfigExtension extends Extension
 {
     /**
      * {@inheritDoc}
+     *
+     * @param array            $configs
+     * @param ContainerBuilder $container
      */
     public function load(array $configs, ContainerBuilder $container)
     {
@@ -47,64 +49,22 @@ class BlackConfigExtension extends Extension
             );
         }
 
-        foreach (array('factory', 'command', 'services', 'configuration') as $basename) {
+        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config/services'));
+
+        foreach (['command', 'factory', 'form'] as $basename) {
             $loader->load(sprintf('%s.xml', $basename));
         }
 
         $this->remapParametersNamespaces(
             $config,
             $container,
-            array(
-                '' => array(
-                    'db_driver'         => 'black_config.db_driver',
-                    'config_class'      => 'black_config.config.model.class',
-                    'config_manager'    => 'black_config.config.manager'
-                )
-            )
-        );
-
-        if (!empty($config['config'])) {
-            $this->loadConfig($config['config'], $container, $loader);
-        }
-
-        if (!empty($config['controller'])) {
-            $this->loadController($config['controller'], $container, $loader);
-        }
-    }
-
-    /**
-     * @param array                $config
-     * @param ContainerBuilder     $container
-     * @param Loader\XmlFileLoader $loader
-     */
-    private function loadConfig(array $config, ContainerBuilder $container, Loader\XmlFileLoader $loader)
-    {
-        $loader->load('config.xml');
-
-        $this->remapParametersNamespaces(
-            $config,
-            $container,
-            array(
-                'form'  => 'black_config.config.form.%s',
-            )
-        );
-    }
-
-    /**
-     * @param array                $config
-     * @param ContainerBuilder     $container
-     * @param Loader\XmlFileLoader $loader
-     */
-    private function loadController(array $config, ContainerBuilder $container, Loader\XmlFileLoader $loader)
-    {
-        $loader->load('controller.xml');
-
-        $this->remapParametersNamespaces(
-            $config,
-            $container,
-            array(
-                'class'    => 'black_config.controller.class.%s',
-            )
+            [
+                '' => [
+                    'db_driver'      => 'black_config.db_driver',
+                    'config_class'   => 'black_config.config.model.class',
+                    'config_manager' => 'black_config.config.manager'
+                ]
+            ]
         );
     }
 
@@ -134,10 +94,12 @@ class BlackConfigExtension extends Extension
                 if (!array_key_exists($ns, $config)) {
                     continue;
                 }
+
                 $namespaceConfig = $config[$ns];
             } else {
                 $namespaceConfig = $config;
             }
+
             if (is_array($map)) {
                 $this->remapParameters($namespaceConfig, $container, $map);
             } else {

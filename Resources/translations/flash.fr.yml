@@ -1,9 +1,0 @@
-black:
-    bundle:
-        config:
-            success:
-                create: Le paramètre de configuration a bien été créer
-                update: Le paramètre de configuration a bien été modifié
-                delete: Le paramètre de configuration a bien été supprimé
-            error:
-                failed: Le paramètre de configuration n'a pu être modifié

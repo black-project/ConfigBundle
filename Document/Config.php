@@ -12,7 +12,6 @@
 namespace Black\Bundle\ConfigBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Black\Bundle\ConfigBundle\Model\AbstractConfig;
 
 /**
@@ -20,7 +19,6 @@ use Black\Bundle\ConfigBundle\Model\AbstractConfig;
  *
  * @ODM\MappedSuperclass()
  *
- * @package Black\Bundle\ConfigBundle\Document
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
@@ -28,7 +26,6 @@ abstract class Config extends AbstractConfig
 {
     /**
      * @ODM\String
-     * @Assert\NotNull
      */
     protected $name;
 

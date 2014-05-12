@@ -19,7 +19,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 /**
  * Class ConfigType
  *
- * @package Black\Bundle\ConfigBundle\Form\Type
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
@@ -54,18 +53,18 @@ class ConfigType extends AbstractType
         $builder->addEventSubscriber($this->buttonSubscriber);
 
         $builder
-            ->add('name', 'text', array(
+            ->add('name', 'text', [
                     'label' => 'black.bundle.config.admin.config.name.label'
-                )
+                ]
             )
-            ->add('value', 'textarea', array(
+            ->add('value', 'textarea', [
                     'label' => 'black.bundle.config.admin.config.value.label'
-                )
+                ]
             )
-            ->add('protected', 'checkbox', array(
-                    'required'  => false,
-                    'label'     => 'black.bundle.config.admin.config.protected.label'
-                )
+            ->add('protected', 'checkbox', [
+                    'required' => false,
+                    'label' => 'black.bundle.config.admin.config.protected.label'
+                ]
             );
     }
 
@@ -75,11 +74,11 @@ class ConfigType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(
-            array(
-                'data_class'            => $this->class,
-                'intention'             => 'config_form',
-                'translation_domain'    => 'form'
-            )
+            [
+                'data_class' => $this->class,
+                'intention' => 'config_form',
+                'translation_domain' => 'form',
+            ]
         );
     }
 

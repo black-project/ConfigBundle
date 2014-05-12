@@ -16,11 +16,10 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 /**
  * Class ConfigNotFoundException
  *
- * @package Black\Bundle\PageBundle\Exception
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class ConfigNotFoundException extends NotFoundHttpException
+final class ConfigNotFoundException extends NotFoundHttpException
 {
     /**
      * Constructor.
@@ -33,4 +32,4 @@ class ConfigNotFoundException extends NotFoundHttpException
     {
         parent::__construct($message, $previous, $code);
     }
-} 
+}

@@ -19,7 +19,6 @@ use Black\Bundle\ConfigBundle\Model\ConfigInterface;
  *
  * AddParameterCommand return the Config object and values
  *
- * @package Black\Bundle\ConfigBundle\Command\Parameter
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
@@ -41,7 +40,7 @@ class AddParameterCommand implements CommandInterface
      * @param ConfigInterface $config
      * @param array           $parameters
      */
-    public function __construct(ConfigInterface $config, array $parameters = array())
+    public function __construct(ConfigInterface $config, array $parameters = [])
     {
         $this->config     = $config;
         $this->parameters = $parameters;
@@ -66,4 +65,4 @@ class AddParameterCommand implements CommandInterface
     {
         return $this->parameters;
     }
-} 
+}

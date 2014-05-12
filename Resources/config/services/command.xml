@@ -1,26 +1,19 @@
 <?xml version="1.0" ?>
 
 <container xmlns="http://symfony.com/schema/dic/services"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
         <parameter key="black_config.command.create_property.class">Black\Bundle\ConfigBundle\Command\CreatePropertyCommand</parameter>
         <parameter key="black_config.command.add_parameter.class">Black\Bundle\ConfigBundle\Command\AddParameterCommand</parameter>
+
         <parameter key="black_config.command.bus.parameter.class">Black\Bundle\ConfigBundle\Command\Bus\ParameterBus</parameter>
         <parameter key="black_config.command.parameter.add_parameter_handler.class">Black\Bundle\ConfigBundle\Command\Parameter\AddParameterHandler</parameter>
-
     </parameters>
 
     <services>
-        <!-- Exposed services -->
-        <service id="black_config.command.property" alias="black_config.command.create_property" />
-        <service id="black_config.command.parameter" alias="black_config.command.add_parameter" />
 
-        <service id="black_config.bus.parameter" alias="black_config.command.bus.parameter" />
-        <service id="black_config.parameter.add" alias="black_config.parameter.add_parameter_handler" />
-
-        <!-- Concrete implementations -->
         <service id="black_config.command.create_property" class="%black_config.command.create_property.class%">
             <argument type="service" id="black_config.factory.property" />
             <argument type="service" id="black_config.manager.config" />
@@ -30,16 +23,15 @@
         <service id="black_config.command.add_parameter" class="%black_config.command.add_parameter.class%">
             <argument type="service" id="black_config.command.bus.parameter" />
             <argument type="service" id="black_config.manager.config" />
-            <argument type="service" id="black_config.exception.config" />
             <tag name="console.command" />
         </service>
 
-        <service id="black_config.command.bus.parameter" public="false" class="%black_config.command.bus.parameter.class%">
-            <argument type="service" id="black_config.manager.config" />
-            <argument type="service" id="black_config.parameter.add" />
-        </service>
+        <service id="black_config.parameter.add_parameter_handler" class="%black_config.command.parameter.add_parameter_handler.class%" public="false" />
 
-        <service id="black_config.parameter.add_parameter_handler" public="false" class="%black_config.command.parameter.add_parameter_handler.class%" />
+        <service id="black_config.command.bus.parameter" class="%black_config.command.bus.parameter.class%" public="false">
+            <argument type="service" id="black_config.manager.config" />
+            <argument type="service" id="black_config.parameter.add_parameter_handler" />
+        </service>
 
     </services>
 

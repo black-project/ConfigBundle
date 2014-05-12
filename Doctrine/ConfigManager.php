@@ -18,7 +18,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 /**
  * Class ConfigManager
  *
- * @package Black\Bundle\ConfigBundle\Doctrine
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
@@ -27,7 +26,7 @@ class ConfigManager implements ConfigManagerInterface, ManagerInterface
     /**
      * @var array
      */
-    protected $properties = array();
+    protected $properties = [];
 
     /**
      * @var ObjectManager
@@ -146,7 +145,7 @@ class ConfigManager implements ConfigManagerInterface, ManagerInterface
      */
     public function findDocument($value)
     {
-        return $this->repository->findOneBy(array('id' => $value));
+        return $this->repository->findOneBy(['id' => $value]);
     }
 
     /**
@@ -176,7 +175,7 @@ class ConfigManager implements ConfigManagerInterface, ManagerInterface
      */
     public function findPropertyByName($name)
     {
-        return $this->repository->findOneBy(array('name' => $name));
+        return $this->repository->findOneBy(['name' => $name]);
     }
 
     /**
@@ -213,6 +212,6 @@ class ConfigManager implements ConfigManagerInterface, ManagerInterface
      */
     public function unload()
     {
-        $this->properties = array();
+        $this->properties = [];
     }
 }

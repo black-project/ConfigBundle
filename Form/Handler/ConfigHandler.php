@@ -17,13 +17,12 @@ use Black\Bundle\CommonBundle\Form\Handler\HandlerInterface;
 use Black\Bundle\ConfigBundle\Model\ConfigInterface;
 
 /**
- * Class ConfigFormHandler
+ * Class ConfigHandler
  *
- * @package Black\Bundle\ConfigBundle\Form\Handler
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class ConfigFormHandler implements HandlerInterface
+class ConfigHandler implements HandlerInterface
 {
     /**
      * @var \Symfony\Component\Form\FormInterface
@@ -131,7 +130,7 @@ class ConfigFormHandler implements HandlerInterface
         }
 
         if ($this->form->get('save')->isClicked()) {
-            $this->setUrl($this->configuration->generateUrl($this->configuration->getParameter('route')['update'], array('value' => $config->getId())));
+            $this->setUrl($this->configuration->generateUrl($this->configuration->getParameter('route')['update'], ['value' => $config->getId()]));
 
             return true;
         }
