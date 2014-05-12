@@ -12,7 +12,6 @@
 namespace Black\Bundle\ConfigBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Black\Bundle\ConfigBundle\Model\AbstractConfig;
 
 /**

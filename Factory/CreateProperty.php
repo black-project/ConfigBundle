@@ -12,7 +12,6 @@
 namespace Black\Bundle\ConfigBundle\Factory;
 
 use Black\Bundle\ConfigBundle\Model\ConfigManagerInterface;
-use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 /**
  * Class CreateProperty

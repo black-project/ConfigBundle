@@ -12,7 +12,6 @@
 namespace Black\Bundle\ConfigBundle\Command\Parameter;
 
 use Black\Bundle\CommonBundle\Command\HandlerInterface;
-use Black\Bundle\ConfigBundle\Model\ConfigManagerInterface;
 
 /**
  * Class AddParameterHandler
