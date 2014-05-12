@@ -14,15 +14,13 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=5.4.0",
-        "black/common-bundle": "~0.3",
-        "black/assets-bundle": "~0.2"
+        "black/common-bundle": "dev-feature/0.3"
     },
     "suggest": {
         "doctrine/mongodb-odm": "Needed when using mongo implementation",
         "doctrine/mongodb-odm-bundle": "Needed when using mongo implementation"
     },
     "autoload": {
-        "psr-0": { "Black\\Bundle\\ConfigBundle": "" }
-    },
-    "target-dir": "Black/Bundle/ConfigBundle"
+        "psr-4": { "Black\\Bundle\\ConfigBundle\\": "" }
+    }
 }
