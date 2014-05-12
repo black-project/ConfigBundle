@@ -33,7 +33,7 @@ class AddParameterHandler implements HandlerInterface
     /**
      * Execute the command
      *
-     * @return boolean
+     * @return bool
      */
     public function execute()
     {

@@ -58,7 +58,7 @@ class ParameterBus implements BusInterface
      * @param ConfigInterface $config
      * @param array           $parameters
      *
-     * @return boolean
+     * @return bool
      */
     public function handle(ConfigInterface $config, array $parameters)
     {
@@ -77,7 +77,7 @@ class ParameterBus implements BusInterface
      * @param ConfigInterface $config
      * @param array           $parameters
      *
-     * @return boolean
+     * @return bool
      */
     protected function addParameter(ConfigInterface $config, array $parameters)
     {
