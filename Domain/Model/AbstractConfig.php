@@ -43,93 +43,27 @@ abstract class AbstractConfig implements ConfigInterface
      */
     protected $protected;
 
-    /**
-     * Constructor
-     */
     public function __construct()
     {
         $this->protected = false;
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @return int|mixed
-     */
-    public function getId()
+    public function create($name, $value, $protected)
     {
-        return $this->id;
+        $this->name      = $name;
+        $this->value     = $value;
+        $this->protected = $protected;
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @return mixed|string
-     */
-    public function getName()
+    public function modify($name, $value)
     {
-        return $this->name;
+        $this->name  = $name;
+        $this->value = $value;
     }
 
-    /**
-     * Set the name of the document
-     *
-     * @param string $name
-     *
-     * @return $this
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @return mixed|string
-     */
-    public function getValue()
-    {
-        return $this->value;
-    }
-
-    /**
-     * Set the value of the document
-     *
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setValue($value)
+    public function updateParameter(array $value)
     {
         $this->value = $value;
-
-        return $this;
     }
 
-    /**
-     * Set the protected status of your document
-     *
-     * @param boolean $protected
-     *
-     * @return $this
-     */
-    public function setProtected($protected)
-    {
-        $this->protected = $protected;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @return bool|mixed|string
-     */
-    public function getProtected()
-    {
-        return $this->protected;
-    }
 }
