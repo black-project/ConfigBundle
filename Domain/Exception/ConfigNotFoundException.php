@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Black\Bundle\ConfigBundle\Exception;
+namespace Black\Bundle\ConfigBundle\Domain\Exception;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 

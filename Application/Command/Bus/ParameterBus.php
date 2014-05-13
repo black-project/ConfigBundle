@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Black\Bundle\ConfigBundle\Command\Bus;
+namespace Black\Bundle\ConfigBundle\Application\Command\Bus;
 
 use Black\Bundle\CommonBundle\Command\BusInterface;
-use Black\Bundle\ConfigBundle\Command\Parameter\AddParameterCommand;
-use Black\Bundle\ConfigBundle\Command\Parameter\AddParameterHandler;
-use Black\Bundle\ConfigBundle\Model\ConfigInterface;
-use Black\Bundle\ConfigBundle\Model\ConfigManagerInterface;
+use Black\Bundle\ConfigBundle\Application\Command\Parameter\AddParameterCommand;
+use Black\Bundle\ConfigBundle\Application\Command\Parameter\AddParameterHandler;
+use Black\Bundle\ConfigBundle\Domain\Model\ConfigInterface;
+use Black\Bundle\ConfigBundle\Domain\Model\ConfigManagerInterface;
 
 /**
  * Class ParameterBus

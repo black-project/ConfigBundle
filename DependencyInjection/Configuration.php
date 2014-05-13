@@ -58,7 +58,7 @@ class Configuration implements ConfigurationInterface
 
                 ->scalarNode('config_class')->isRequired()->cannotBeEmpty()->end()
                 ->scalarNode('config_manager')
-                    ->defaultValue('Black\\Bundle\\ConfigBundle\\Doctrine\\ConfigManager')
+                    ->defaultValue('Black\\Bundle\\ConfigBundle\\Infrastructure\\Doctrine\\ConfigManager')
                 ->end()
             ->end();
 

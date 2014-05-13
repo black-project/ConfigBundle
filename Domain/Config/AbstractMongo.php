@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Black\Bundle\ConfigBundle\Document;
+namespace Black\Bundle\ConfigBundle\Domain\Config;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
-use Black\Bundle\ConfigBundle\Model\AbstractConfig;
+use Black\Bundle\ConfigBundle\Domain\Model\AbstractConfig;
 
 /**
  * Class Config
@@ -22,7 +22,7 @@ use Black\Bundle\ConfigBundle\Model\AbstractConfig;
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-abstract class Config extends AbstractConfig
+abstract class AbstractMongo extends AbstractConfig
 {
     /**
      * @ODM\String

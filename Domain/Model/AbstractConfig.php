@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Black\Bundle\ConfigBundle\Model;
+namespace Black\Bundle\ConfigBundle\Domain\Model;
 
 use Symfony\Component\Validator\Constraints as Assert;
 

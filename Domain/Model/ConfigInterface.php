@@ -9,13 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Black\Bundle\ConfigBundle\Model;
+namespace Black\Bundle\ConfigBundle\Domain\Model;
 
 /**
- * Class ConfigInterface
+ * Interface ConfigInterface
  *
- * @author  Alexandre Balmes <albalmes@gmail.com>
- * @license http://opensource.org/licenses/mit-license.php MIT
+ * @package Black\Bundle\ConfigBundle\Domain\Model
  */
 interface ConfigInterface
 {

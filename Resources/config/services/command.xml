@@ -8,14 +8,13 @@
         <parameter key="black_config.command.create_property.class">Black\Bundle\ConfigBundle\Command\CreatePropertyCommand</parameter>
         <parameter key="black_config.command.add_parameter.class">Black\Bundle\ConfigBundle\Command\AddParameterCommand</parameter>
 
-        <parameter key="black_config.command.bus.parameter.class">Black\Bundle\ConfigBundle\Command\Bus\ParameterBus</parameter>
-        <parameter key="black_config.command.parameter.add_parameter_handler.class">Black\Bundle\ConfigBundle\Command\Parameter\AddParameterHandler</parameter>
+        <parameter key="black_config.command.bus.parameter.class">Black\Bundle\ConfigBundle\Application\Command\Bus\ParameterBus</parameter>
+        <parameter key="black_config.command.parameter.add_parameter_handler.class">Black\Bundle\ConfigBundle\Application\Command\Parameter\AddParameterHandler</parameter>
     </parameters>
 
     <services>
 
         <service id="black_config.command.create_property" class="%black_config.command.create_property.class%">
-            <argument type="service" id="black_config.factory.property" />
             <argument type="service" id="black_config.manager.config" />
             <tag name="console.command" />
         </service>

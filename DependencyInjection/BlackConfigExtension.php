@@ -51,17 +51,14 @@ class BlackConfigExtension extends Extension
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config/services'));
 
-        foreach (['command', 'factory', 'form'] as $basename) {
+        foreach (['command', 'form'] as $basename) {
             $loader->load(sprintf('%s.xml', $basename));
         }
 
-        $this->remapParametersNamespaces(
-            $config,
-            $container,
-            [
+        $this->remapParametersNamespaces($config, $container, [
                 '' => [
-                    'db_driver'      => 'black_config.db_driver',
-                    'config_class'   => 'black_config.config.model.class',
+                    'db_driver' => 'black_config.db_driver',
+                    'config_class' => 'black_config.config.model.class',
                     'config_manager' => 'black_config.config.manager'
                 ]
             ]

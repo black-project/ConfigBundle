@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Black\Bundle\ConfigBundle\Command\Parameter;
+namespace Black\Bundle\ConfigBundle\Application\Command\Parameter;
 
 use Black\Bundle\CommonBundle\Command\CommandInterface;
-use Black\Bundle\ConfigBundle\Model\ConfigInterface;
+use Black\Bundle\ConfigBundle\Domain\Model\ConfigInterface;
 
 /**
  * Class AddParameterCommand

@@ -6,8 +6,8 @@
 
     <parameters>
         <parameter key="black_config.form.type.config.name">black_config_config</parameter>
-        <parameter key="black_config.form.type.config.class">Black\Bundle\ConfigBundle\Form\Type\ConfigType</parameter>
-        <parameter key="black_config.form.handler.config.class">Black\Bundle\ConfigBundle\Form\Type\ConfigHandler</parameter>
+        <parameter key="black_config.form.type.config.class">Black\Bundle\ConfigBundle\Application\Form\Type\ConfigType</parameter>
+        <parameter key="black_config.form.handler.config.class">Black\Bundle\ConfigBundle\Application\Form\Type\ConfigHandler</parameter>
     </parameters>
 
     <services>

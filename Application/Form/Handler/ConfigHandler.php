@@ -9,12 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Black\Bundle\ConfigBundle\Form\Handler;
+namespace Black\Bundle\ConfigBundle\Application\Form\Handler;
 
 use Symfony\Component\Form\FormInterface;
-use Black\Bundle\CommonBundle\Configuration\Configuration;
 use Black\Bundle\CommonBundle\Form\Handler\HandlerInterface;
-use Black\Bundle\ConfigBundle\Model\ConfigInterface;
+use Black\Bundle\ConfigBundle\Domain\Model\ConfigInterface;
 
 /**
  * Class ConfigHandler

@@ -9,13 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Black\Bundle\ConfigBundle\Model;
+namespace Black\Bundle\ConfigBundle\Infrastructure\Doctrine;
 
 /**
- * Interface ConfigRepositoryInterface
+ * Interface ConfigManagerInterface
  *
- * @package Black\Bundle\ConfigBundle\Model
+ * @package Black\Bundle\ConfigBundle\Infrastructure\Doctrine
  */
-interface ConfigRepositoryInterface
+interface ConfigManagerInterface
 {
+
 }

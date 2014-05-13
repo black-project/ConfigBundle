@@ -9,9 +9,8 @@
  * file that was distributed with this source code.
  */
 
-namespace Black\Bundle\ConfigBundle\Doctrine;
+namespace Black\Bundle\ConfigBundle\Infrastructure\Doctrine;
 
-use Black\Bundle\ConfigBundle\Model\ConfigManagerInterface;
 use Black\Bundle\CommonBundle\Doctrine\ManagerInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 

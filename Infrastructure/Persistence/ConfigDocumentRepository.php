@@ -8,17 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Black\Bundle\ConfigBundle\Entity;
+
+namespace Black\Bundle\ConfigBundle\Infrastructure\Persistence;
 
 use Black\Bundle\ConfigBundle\Model\ConfigRepositoryInterface;
-use Doctrine\ORM\EntityRepository;
+use Doctrine\ODM\MongoDB\DocumentRepository;
 
 /**
- * Class ConfigRepository
+ * Class ConfigDocumentRepository
  *
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class ConfigRepository extends EntityRepository implements ConfigRepositoryInterface
+class ConfigDocumentRepository extends DocumentRepository implements ConfigRepositoryInterface
 {
 }
