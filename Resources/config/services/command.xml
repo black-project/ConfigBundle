@@ -8,8 +8,8 @@
         <parameter key="black_config.command.create_property.class">Black\Bundle\ConfigBundle\Command\CreatePropertyCommand</parameter>
         <parameter key="black_config.command.add_parameter.class">Black\Bundle\ConfigBundle\Command\AddParameterCommand</parameter>
 
-        <parameter key="black_config.command.bus.parameter.class">Black\Bundle\ConfigBundle\Application\Command\Bus\ParameterBus</parameter>
-        <parameter key="black_config.command.parameter.add_parameter_handler.class">Black\Bundle\ConfigBundle\Application\Command\Parameter\AddParameterHandler</parameter>
+        <parameter key="black_config.command.bus.parameter.class">Black\Bundle\ConfigBundle\Application\Command\ParameterBus</parameter>
+        <parameter key="black_config.command.parameter.add_parameter_handler.class">Black\Bundle\ConfigBundle\Application\Command\AddParameterHandler</parameter>
     </parameters>
 
     <services>
