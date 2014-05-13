@@ -17,12 +17,12 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Class ConfigType
+ * Class CreatePropertyType
  *
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class ConfigType extends AbstractType
+class CreatePropertyType extends AbstractType
 {
     /**
      * @var type
@@ -60,11 +60,6 @@ class ConfigType extends AbstractType
             ->add('value', 'textarea', [
                     'label' => 'black.bundle.config.admin.config.value.label'
                 ]
-            )
-            ->add('protected', 'checkbox', [
-                    'required' => false,
-                    'label' => 'black.bundle.config.admin.config.protected.label'
-                ]
             );
     }
 
@@ -76,7 +71,7 @@ class ConfigType extends AbstractType
         $resolver->setDefaults(
             [
                 'data_class' => $this->class,
-                'intention' => 'config_form',
+                'intention' => $this->getName(),
                 'translation_domain' => 'form',
             ]
         );
@@ -87,6 +82,6 @@ class ConfigType extends AbstractType
      */
     public function getName()
     {
-        return 'black_config_config';
+        return 'modify_property';
     }
 }
