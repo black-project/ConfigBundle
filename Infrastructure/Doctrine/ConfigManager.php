@@ -11,6 +11,7 @@
 
 namespace Black\Bundle\ConfigBundle\Infrastructure\Doctrine;
 
+use Black\Bundle\ConfigBundle\Domain\Model\ConfigManagerInterface;
 use Black\Bundle\CommonBundle\Doctrine\ManagerInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -22,11 +23,6 @@ use Doctrine\Common\Persistence\ObjectManager;
  */
 class ConfigManager implements ConfigManagerInterface, ManagerInterface
 {
-    /**
-     * @var array
-     */
-    protected $properties = [];
-
     /**
      * @var ObjectManager
      */
@@ -48,12 +44,11 @@ class ConfigManager implements ConfigManagerInterface, ManagerInterface
      */
     public function __construct(ObjectManager $dm, $class)
     {
-        $this->manager     = $dm;
-        $this->repository  = $dm->getRepository($class);
+        $this->manager    = $dm;
+        $this->repository = $dm->getRepository($class);
 
-        $metadata          = $dm->getClassMetadata($class);
-        $this->class       = $metadata->name;
-        $this->loadProperties();
+        $metadata    = $dm->getClassMetadata($class);
+        $this->class = $metadata->name;
     }
 
     /**
@@ -132,7 +127,7 @@ class ConfigManager implements ConfigManagerInterface, ManagerInterface
     /**
      * @return mixed
      */
-    public function findDocuments()
+    public function findAll()
     {
         return $this->repository->findAll();
     }
@@ -142,75 +137,18 @@ class ConfigManager implements ConfigManagerInterface, ManagerInterface
      *
      * @return mixed
      */
-    public function findDocument($value)
+    public function find($value)
     {
         return $this->repository->findOneBy(['id' => $value]);
     }
 
     /**
-     * @param array $criteria
+     * @param $name
      *
-     * @return array
+     * @return mixed
      */
-    public function findPropertiesBy(array $criteria)
-    {
-        return $this->repository->findBy($criteria);
-    }
-
-    /**
-     * @param integer $id
-     * 
-     * @return \Black\Bundle\ConfigBundle\Model\ConfigInterface|object
-     */
-    public function findPropertyById($id)
-    {
-        return $this->repository->find($id);
-    }
-
-    /**
-     * @param string  $name
-     * 
-     * @return \Black\Bundle\ConfigBundle\Model\ConfigInterface|object
-     */
-    public function findPropertyByName($name)
+    public function findByName($name)
     {
         return $this->repository->findOneBy(['name' => $name]);
-    }
-
-    /**
-     * @return array
-     */
-    public function getProperties()
-    {
-        return $this->properties;
-    }
-
-    /**
-     * Load properties
-     */
-    public function loadProperties()
-    {
-        if (array() !== $this->properties) {
-            return;
-        }
-
-        $this->properties = $this->repository->findAll();
-    }
-
-    /**
-     *
-     */
-    public function reloadProperties()
-    {
-        $this->unload();
-        $this->loadProperties();
-    }
-
-    /**
-     *
-     */
-    public function unload()
-    {
-        $this->properties = [];
     }
 }

@@ -10,7 +10,7 @@
  */
 namespace Black\Bundle\ConfigBundle\Infrastructure\Persistence;
 
-use Black\Bundle\ConfigBundle\Model\ConfigRepositoryInterface;
+use Black\Bundle\ConfigBundle\Domain\Model\ConfigRepositoryInterface;
 use Doctrine\ORM\EntityRepository;
 
 /**

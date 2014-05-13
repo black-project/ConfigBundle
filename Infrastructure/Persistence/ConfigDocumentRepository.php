@@ -11,7 +11,6 @@
 
 namespace Black\Bundle\ConfigBundle\Infrastructure\Persistence;
 
-use Black\Bundle\ConfigBundle\Model\ConfigRepositoryInterface;
 use Doctrine\ODM\MongoDB\DocumentRepository;
 
 /**
