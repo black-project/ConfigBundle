@@ -35,7 +35,7 @@ abstract class AbstractEntity extends AbstractConfig
     protected $value;
 
     /**
-     * @ORM\Column(name="protected", type="boolean")
+     * @ORM\Column(name="secure", type="boolean")
      */
-    protected $protected;
+    protected $secure;
 }

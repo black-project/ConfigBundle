@@ -61,9 +61,9 @@ class CreatePropertyType extends AbstractType
                     'label' => 'black.bundle.config.admin.config.value.label'
                 ]
             )
-            ->add('protected', 'checkbox', [
+            ->add('secure', 'checkbox', [
                     'required' => false,
-                    'label' => 'black.bundle.config.admin.config.protected.label'
+                    'label' => 'black.bundle.config.admin.config.secure.label'
                 ]
             );
     }

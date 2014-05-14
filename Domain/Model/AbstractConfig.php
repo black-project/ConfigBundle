@@ -41,26 +41,41 @@ abstract class AbstractConfig implements ConfigInterface
     /**
      * @var string
      */
-    protected $protected;
+    protected $secure;
 
+    /**
+     *
+     */
     public function __construct()
     {
-        $this->protected = false;
+        $this->secure = false;
     }
 
-    public function create($name, $value, $protected)
+    /**
+     * @param $name
+     * @param $value
+     * @param $secure
+     */
+    public function create($name, $value, $secure)
     {
-        $this->name      = $name;
-        $this->value     = $value;
-        $this->protected = $protected;
+        $this->name   = $name;
+        $this->value  = $value;
+        $this->secure = $secure;
     }
 
+    /**
+     * @param $name
+     * @param $value
+     */
     public function modify($name, $value)
     {
         $this->name  = $name;
         $this->value = $value;
     }
 
+    /**
+     * @param array $value
+     */
     public function updateParameter(array $value)
     {
         $this->value = $value;

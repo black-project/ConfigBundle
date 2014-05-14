@@ -125,14 +125,6 @@ class ConfigManager implements ConfigManagerInterface, ManagerInterface
     }
 
     /**
-     * @return mixed
-     */
-    public function findAll()
-    {
-        return $this->repository->findAll();
-    }
-
-    /**
      * @param $value
      *
      * @return mixed
@@ -140,15 +132,5 @@ class ConfigManager implements ConfigManagerInterface, ManagerInterface
     public function find($value)
     {
         return $this->repository->findOneBy(['id' => $value]);
-    }
-
-    /**
-     * @param $name
-     *
-     * @return mixed
-     */
-    public function findByName($name)
-    {
-        return $this->repository->findOneBy(['name' => $name]);
     }
 }

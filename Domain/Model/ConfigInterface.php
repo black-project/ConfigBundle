@@ -40,9 +40,9 @@ interface ConfigInterface
     public function getValue();
 
     /**
-     * Return the protected status of the document
+     * Return the secure status of the document
      *
      * @return mixed
      */
-    public function getProtected();
+    public function getSecure();
 }

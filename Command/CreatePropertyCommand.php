@@ -62,7 +62,7 @@ class CreatePropertyCommand extends Command
             ->setDescription('Create a new property')
             ->setDefinition([
                 new InputArgument('name', InputArgument::REQUIRED, 'The name of the property'),
-                new InputArgument('protected', InputArgument::REQUIRED, 'The status of the property'),
+                new InputArgument('secure', InputArgument::REQUIRED, 'The status of the property'),
                 new InputArgument('value', InputArgument::REQUIRED, 'The value of the property')
             ]);
     }
@@ -72,12 +72,12 @@ class CreatePropertyCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $name      = $input->getArgument('name');
-        $protected = $input->getArgument('protected');
-        $value     = $input->getArgument('value');
+        $name   = $input->getArgument('name');
+        $secure = $input->getArgument('secure');
+        $value  = $input->getArgument('value');
 
         $factory  = $this->createProperty;
-        $property = $factory->execute($name, $protected, $value);
+        $property = $factory->execute($name, $secure, $value);
 
         $this->configManager->persist($property);
         $this->configManager->flush();
@@ -108,11 +108,11 @@ class CreatePropertyCommand extends Command
             $input->setArgument('name', $name);
         }
 
-        if (!$input->getArgument('protected')) {
-            $status    = [true => 'yes', false => 'no'];
-            $protected = $this->getHelper('dialog')->select($output, 'Is your property is protected?', $status);
+        if (!$input->getArgument('secure')) {
+            $status = [true => 'yes', false => 'no'];
+            $secure = $this->getHelper('dialog')->select($output, 'Is your property is secure?', $status);
 
-            $input->setArgument('protected', $protected);
+            $input->setArgument('secure', $secure);
         }
 
         if (!$input->getArgument('value')) {

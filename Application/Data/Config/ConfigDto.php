@@ -9,16 +9,20 @@
  * file that was distributed with this source code.
  */
 
-namespace Black\Bundle\ConfigBundle\Application\Command;
+namespace Black\Bundle\ConfigBundle\Application\Data\Config;
 
 /**
- * Class CreatePropertyCommand
+ * Class ConfigDto
  *
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class CreatePropertyCommand
+class ConfigDto
 {
+    /**
+     * @var
+     */
+    protected $id;
 
     /**
      * @var
@@ -31,20 +35,19 @@ class CreatePropertyCommand
     protected $value;
 
     /**
-     * @var
+     * @return string
      */
-    protected $secure;
+    public function __toString()
+    {
+        return (string) $this->name;
+    }
 
     /**
-     * @param $name
-     * @param $value
-     * @param $secure
+     * @return mixed
      */
-    public function __construct($name, $value, $secure)
+    public function getId()
     {
-        $this->name   = $name;
-        $this->value  = $value;
-        $this->secure = $secure;
+        return $this->id;
     }
 
     /**
@@ -64,10 +67,24 @@ class CreatePropertyCommand
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getSecure()
+    public function serialize()
     {
-        return $this->secure;
+        $data = get_object_vars($this);
+
+        return serialize($data);
+    }
+
+    /**
+     * @param $data
+     */
+    public function unserialize($data)
+    {
+        $object = unserialize($data);
+
+        foreach ($object as $variable => $value) {
+            $this->$variable = $value;
+        }
     }
 } 

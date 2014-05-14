@@ -37,5 +37,5 @@ abstract class AbstractMongo extends AbstractConfig
     /**
      * @ODM\Boolean()
      */
-    protected $protected;
+    protected $secure;
 }
